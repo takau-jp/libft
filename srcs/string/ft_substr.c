@@ -6,13 +6,11 @@
 /*   By: stanaka2 < stanaka2@student.42tokyo.jp>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/27 10:18:01 by stanaka2          #+#    #+#             */
-/*   Updated: 2025/04/28 23:10:17 by stanaka2         ###   ########.fr       */
+/*   Updated: 2025/04/29 20:22:12 by stanaka2         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
-
-static size_t	ft_strnlen(const char *s, size_t maxlen);
 
 char	*ft_substr(char const *s, unsigned int start, size_t len)
 {
@@ -28,17 +26,4 @@ char	*ft_substr(char const *s, unsigned int start, size_t len)
 		return (NULL);
 	ft_strlcpy(substr, s + start, len + 1);
 	return (substr);
-}
-
-static size_t	ft_strnlen(const char *s, size_t maxlen)
-{
-	size_t	len;
-
-	len = 0;
-	while (len < maxlen && *s)
-	{
-		s++;
-		len++;
-	}
-	return (len);
 }

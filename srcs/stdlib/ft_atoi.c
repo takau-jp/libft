@@ -6,15 +6,13 @@
 /*   By: stanaka2 < stanaka2@student.42tokyo.jp>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/24 21:40:26 by stanaka2          #+#    #+#             */
-/*   Updated: 2025/04/29 02:09:56 by stanaka2         ###   ########.fr       */
+/*   Updated: 2025/04/29 19:55:10 by stanaka2         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include	"libft.h"
 
-static int				ft_isspace(int c);
-static bool				is_long_overflow(long *num, int sign, int n);
-static unsigned long	ft_labs(long i);
+static bool	is_long_overflow(long *num, int sign, int n);
 
 int	ft_atoi(const char *nptr)
 {
@@ -41,12 +39,6 @@ int	ft_atoi(const char *nptr)
 	return (num * sign);
 }
 
-static int	ft_isspace(int c)
-{
-	return (c == ' ' || c == '\f' || c == '\n' || \
-			c == '\r' || c == '\t' || c == '\v');
-}
-
 static bool	is_long_overflow(long *num, int sign, int n)
 {
 	long	limit;
@@ -59,14 +51,4 @@ static bool	is_long_overflow(long *num, int sign, int n)
 		return (true);
 	}
 	return (false);
-}
-
-static unsigned long	ft_labs(long i)
-{
-	unsigned long	u;
-
-	u = i;
-	if (i < 0)
-		u = ~i + 1;
-	return (u);
 }
