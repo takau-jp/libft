@@ -6,7 +6,7 @@
 /*   By: stanaka2 < stanaka2@student.42tokyo.jp>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/24 21:58:34 by stanaka2          #+#    #+#             */
-/*   Updated: 2025/06/11 09:09:22 by stanaka2         ###   ########.fr       */
+/*   Updated: 2025/06/11 11:05:37 by stanaka2         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,10 +14,10 @@
 # define LIBFT_H
 
 # include <unistd.h>
-# include <stddef.h>
 # include <stdbool.h>
 # include <limits.h>
 # include <stdlib.h>
+# include <stdint.h>
 
 typedef struct s_list
 {
@@ -69,7 +69,7 @@ size_t			ft_strlen(const char *s);
 char			*ft_strmapi(char const *s, char (*f)(unsigned int, char));
 char			*ft_strncat(char *dest, char *src, unsigned int nb);
 int				ft_strncmp(const char *s1, const char *s2, size_t n);
-char			*strncpy(char *dst, const char *src, size_t n);
+char			*ft_strncpy(char *dst, const char *src, size_t n);
 char			*ft_strndup(char const *s1, size_t n);
 size_t			ft_strnlen(const char *s, size_t maxlen);
 char			*ft_strnstr(const char *big, const char *little, size_t len);
