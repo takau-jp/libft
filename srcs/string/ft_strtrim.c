@@ -6,7 +6,7 @@
 /*   By: stanaka2 < stanaka2@student.42tokyo.jp>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/27 09:04:58 by stanaka2          #+#    #+#             */
-/*   Updated: 2025/04/28 23:15:38 by stanaka2         ###   ########.fr       */
+/*   Updated: 2025/04/30 19:47:02 by stanaka2         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,9 +14,9 @@
 
 char	*ft_strtrim(char const *s1, char const *set)
 {
-	char			*s;
-	unsigned char	trim_set[256];
-	size_t			len;
+	char	*s;
+	char	trim_set[256];
+	size_t	len;
 
 	if (!s1)
 		return (NULL);

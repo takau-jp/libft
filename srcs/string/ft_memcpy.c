@@ -6,7 +6,7 @@
 /*   By: stanaka2 < stanaka2@student.42tokyo.jp>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/25 12:18:02 by stanaka2          #+#    #+#             */
-/*   Updated: 2025/04/28 21:15:36 by stanaka2         ###   ########.fr       */
+/*   Updated: 2025/05/17 03:30:22 by stanaka2         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,8 +19,8 @@ void	*ft_memcpy(void *dst, const void *src, size_t n)
 
 	d = dst;
 	s = src;
-	if (dst == src)
-		return (dst);
+	if (!dst && !src)
+		return (NULL);
 	while (n--)
 		*d++ = *s++;
 	return (dst);

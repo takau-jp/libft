@@ -1,21 +1,23 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_labs.c                                          :+:      :+:    :+:   */
+/*   ft_abs_uint.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: stanaka2 < stanaka2@student.42tokyo.jp>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/04/29 19:50:26 by stanaka2          #+#    #+#             */
-/*   Updated: 2025/04/29 19:50:27 by stanaka2         ###   ########.fr       */
+/*   Created: 2025/06/11 09:04:01 by stanaka2          #+#    #+#             */
+/*   Updated: 2025/06/11 09:08:48 by stanaka2         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-unsigned long	ft_labs(long i)
-{
-	unsigned long	u;
+#include "libft.h"
 
-	u = i;
-	if (i < 0)
-		u = ~i + 1;
-	return (u);
+unsigned int	ft_abs_uint(int n)
+{
+	unsigned int	un;
+
+	un = n;
+	if (n < 0)
+		un = ~n + 1;
+	return (un);
 }

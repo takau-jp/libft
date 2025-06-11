@@ -1,21 +1,23 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_abs.c                                           :+:      :+:    :+:   */
+/*   ft_abs_ulong.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: stanaka2 < stanaka2@student.42tokyo.jp>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/04/29 19:50:01 by stanaka2          #+#    #+#             */
-/*   Updated: 2025/04/29 19:50:03 by stanaka2         ###   ########.fr       */
+/*   Created: 2025/06/11 09:01:23 by stanaka2          #+#    #+#             */
+/*   Updated: 2025/06/11 09:08:11 by stanaka2         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-unsigned int	ft_abs(int i)
-{
-	unsigned int	u;
+#include "libft.h"
 
-	u = i;
-	if (i < 0)
-		u = ~i + 1;
-	return (u);
+unsigned long	ft_abs_ulong(long n)
+{
+	unsigned long	un;
+
+	un = n;
+	if (n < 0)
+		un = ~n + 1;
+	return (un);
 }

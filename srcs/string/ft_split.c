@@ -6,7 +6,7 @@
 /*   By: stanaka2 < stanaka2@student.42tokyo.jp>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/25 13:34:48 by stanaka2          #+#    #+#             */
-/*   Updated: 2025/04/28 23:59:37 by stanaka2         ###   ########.fr       */
+/*   Updated: 2025/05/17 13:34:18 by stanaka2         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,7 @@
 
 static size_t	count_words(char const *s, char c);
 static char		**copy_words(char const *s, char c, char **dst, size_t count);
-static size_t	delim_strlen(char const *s, char c);
+static size_t	word_len(char const *s, char c);
 
 char	**ft_split(char const *s, char c)
 {
@@ -58,16 +58,12 @@ static char	**copy_words(char const *s, char c, char **dst, size_t count)
 	{
 		while (*s && *s == c)
 			s++;
-		len = delim_strlen(s, c);
+		len = word_len(s, c);
 		dst[i] = (char *)malloc(len + 1);
 		if (!dst[i])
 		{
 			while (i)
-			{
 				free(dst[--i]);
-				if (i == 0)
-					free(dst[i]);
-			}
 			free(dst);
 			return (NULL);
 		}
@@ -77,7 +73,7 @@ static char	**copy_words(char const *s, char c, char **dst, size_t count)
 	return (dst);
 }
 
-static size_t	delim_strlen(char const *s, char c)
+static size_t	word_len(char const *s, char c)
 {
 	size_t	len;
 

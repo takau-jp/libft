@@ -6,7 +6,7 @@
 /*   By: stanaka2 < stanaka2@student.42tokyo.jp>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/25 13:08:41 by stanaka2          #+#    #+#             */
-/*   Updated: 2025/04/29 02:09:22 by stanaka2         ###   ########.fr       */
+/*   Updated: 2025/06/11 09:23:09 by stanaka2         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,7 +22,7 @@ void	ft_putstr_fd(char *s, int fd)
 	while (s[len])
 	{
 		len++;
-		if (len == SSIZE_MAX)
+		if (len == INT_MAX)
 		{
 			write(fd, s, len);
 			s += len;

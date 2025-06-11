@@ -6,13 +6,13 @@
 /*   By: stanaka2 < stanaka2@student.42tokyo.jp>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/29 19:58:33 by stanaka2          #+#    #+#             */
-/*   Updated: 2025/04/29 20:46:48 by stanaka2         ###   ########.fr       */
+/*   Updated: 2025/05/28 21:38:49 by stanaka2         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <stddef.h>
 
-char	*strncpy(char * dst, const char * src, size_t n)
+char	*strncpy(char *dst, const char *src, size_t n)
 {
 	size_t	i;
 
