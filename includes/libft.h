@@ -6,7 +6,7 @@
 /*   By: stanaka2 < stanaka2@student.42tokyo.jp>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/24 21:58:34 by stanaka2          #+#    #+#             */
-/*   Updated: 2025/06/11 11:05:37 by stanaka2         ###   ########.fr       */
+/*   Updated: 2025/06/30 16:33:56 by stanaka2         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,6 +18,23 @@
 # include <limits.h>
 # include <stdlib.h>
 # include <stdint.h>
+# include <stddef.h>
+
+# ifdef __APPLE__
+#  ifndef PAGE_SIZE
+#   define PAGE_SIZE 16384
+#  endif
+#  ifndef WRITE_BLOCK_SIZE
+#   define WRITE_BLOCK_SIZE PAGE_SIZE
+#  endif
+# else
+#  ifndef PAGE_SIZE
+#   define PAGE_SIZE 4096
+#  endif
+#  ifndef WRITE_BLOCK_SIZE
+#   define WRITE_BLOCK_SIZE 16384
+#  endif
+# endif
 
 typedef struct s_list
 {
@@ -67,7 +84,7 @@ size_t			ft_strlcat(char *dst, const char *src, size_t size);
 size_t			ft_strlcpy(char *dst, const char *src, size_t size);
 size_t			ft_strlen(const char *s);
 char			*ft_strmapi(char const *s, char (*f)(unsigned int, char));
-char			*ft_strncat(char *dest, char *src, unsigned int nb);
+char			*ft_strncat(char *dest, const char *src, size_t n);
 int				ft_strncmp(const char *s1, const char *s2, size_t n);
 char			*ft_strncpy(char *dst, const char *src, size_t n);
 char			*ft_strndup(char const *s1, size_t n);

@@ -6,7 +6,7 @@
 /*   By: stanaka2 < stanaka2@student.42tokyo.jp>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/11 09:04:01 by stanaka2          #+#    #+#             */
-/*   Updated: 2025/06/11 09:08:48 by stanaka2         ###   ########.fr       */
+/*   Updated: 2025/06/29 08:52:00 by stanaka2         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,6 +18,6 @@ unsigned int	ft_abs_uint(int n)
 
 	un = n;
 	if (n < 0)
-		un = ~n + 1;
+		un = -n;
 	return (un);
 }

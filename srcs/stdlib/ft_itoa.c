@@ -6,7 +6,7 @@
 /*   By: stanaka2 < stanaka2@student.42tokyo.jp>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/25 10:41:20 by stanaka2          #+#    #+#             */
-/*   Updated: 2025/05/01 15:52:09 by stanaka2         ###   ########.fr       */
+/*   Updated: 2025/06/29 08:52:17 by stanaka2         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,7 +27,7 @@ char	*ft_itoa(int n)
 	num[digit] = '\0';
 	un = n;
 	if (n < 0)
-		un = ~n + 1;
+		un = -n;
 	while (digit--)
 	{
 		num[digit] = (un % 10) + '0';

@@ -6,7 +6,7 @@
 /*   By: stanaka2 < stanaka2@student.42tokyo.jp>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/25 15:38:52 by stanaka2          #+#    #+#             */
-/*   Updated: 2025/04/25 15:41:37 by stanaka2         ###   ########.fr       */
+/*   Updated: 2025/06/30 14:03:53 by stanaka2         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,7 +17,7 @@ size_t	ft_strlen(const char *s)
 	size_t	len;
 
 	len = 0;
-	while (*s++)
+	while (*(s++))
 		len++;
 	return (len);
 }

@@ -6,7 +6,7 @@
 /*   By: stanaka2 < stanaka2@student.42tokyo.jp>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/25 13:08:41 by stanaka2          #+#    #+#             */
-/*   Updated: 2025/06/11 09:23:09 by stanaka2         ###   ########.fr       */
+/*   Updated: 2025/06/30 14:02:54 by stanaka2         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,20 +14,22 @@
 
 void	ft_putstr_fd(char *s, int fd)
 {
-	ssize_t	len;
+	size_t	len;
+	size_t	chunk;
+	ssize_t	write_res;
 
 	if (!s)
 		return ;
-	len = 0;
-	while (s[len])
+	len = ft_strlen(s);
+	while (len)
 	{
-		len++;
-		if (len == INT_MAX)
-		{
-			write(fd, s, len);
-			s += len;
-			len = 0;
-		}
+		chunk = WRITE_BLOCK_SIZE;
+		if (len < WRITE_BLOCK_SIZE)
+			chunk = len;
+		write_res = write(fd, s, chunk);
+		if (write_res <= 0)
+			return ;
+		s += write_res;
+		len -= write_res;
 	}
-	write(fd, s, len);
 }

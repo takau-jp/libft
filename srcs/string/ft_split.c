@@ -6,7 +6,7 @@
 /*   By: stanaka2 < stanaka2@student.42tokyo.jp>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/25 13:34:48 by stanaka2          #+#    #+#             */
-/*   Updated: 2025/05/17 13:34:18 by stanaka2         ###   ########.fr       */
+/*   Updated: 2025/06/29 08:27:24 by stanaka2         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -78,10 +78,7 @@ static size_t	word_len(char const *s, char c)
 	size_t	len;
 
 	len = 0;
-	while (*s && *s != c)
-	{
-		s++;
+	while (s[len] && s[len] != c)
 		len++;
-	}
 	return (len);
 }
