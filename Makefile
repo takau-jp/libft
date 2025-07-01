@@ -6,7 +6,7 @@
 #    By: stanaka2 < stanaka2@student.42tokyo.jp>    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2025/04/24 21:27:03 by stanaka2          #+#    #+#              #
-#    Updated: 2025/06/30 16:12:39 by stanaka2         ###   ########.fr        #
+#    Updated: 2025/06/30 17:41:11 by stanaka2         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -45,22 +45,22 @@ SRCS += ${addprefix ${SRCDIR}/lst/, \
 GNL_SRCDIR = get_next_line
 SRCS += ${addprefix ${GNL_SRCDIR}/, get_next_line.c get_next_line_utils.c }
 
-# fprintf / printf function
-FPRINTF_SRCDIR = ft_fprintf
+# dprintf / printf function
+FPRINTF_SRCDIR = dprintf
 ifeq ($(OS), Darwin)
-	SRCS += ${addprefix ${FPRINTF_SRCDIR}/, ft_fprintf_darwin.c ft_printf_darwin.c }
+	SRCS += ${addprefix ${FPRINTF_SRCDIR}/, ft_dprintf_darwin.c ft_printf_darwin.c }
 else
-	SRCS += ${addprefix ${FPRINTF_SRCDIR}/, ft_fprintf.c ft_printf.c }
+	SRCS += ${addprefix ${FPRINTF_SRCDIR}/, ft_dprintf.c ft_printf.c }
 endif
-SRCS += ${addprefix ${FPRINTF_SRCDIR}/, ft_fprintf_utils.c }
-# fprintf/srcs/read_conversion
+SRCS += ${addprefix ${FPRINTF_SRCDIR}/, ft_dprintf_utils.c }
+# dprintf/srcs/read_conversion
 ifeq ($(OS), Darwin)
 	SRCS += ${addprefix ${FPRINTF_SRCDIR}/read_conversion/, ft_read_conversion_darwin.c }
 else
 	SRCS += ${addprefix ${FPRINTF_SRCDIR}/read_conversion/, ft_read_conversion.c }
 endif
 SRCS += ${addprefix ${FPRINTF_SRCDIR}/read_conversion/, ft_read_conversion_utils.c }
-# fprintf/srcs//print_conversion
+# dprintf/srcs//print_conversion
 SRCS += ${addprefix ${FPRINTF_SRCDIR}/print_conversion/, \
 			ft_conv_a.c \
 			ft_conv_d_i.c \
@@ -87,7 +87,7 @@ else
 			ft_conv_percent.c \
 			}
 endif
-# fprintf/srcs/print_conversion/binary64
+# dprintf/srcs/print_conversion/binary64
 SRCS += ${addprefix ${FPRINTF_SRCDIR}/print_conversion/binary64/, \
 			ft_conv_e_binary64.c \
 			ft_conv_f_binary64.c \
@@ -116,7 +116,7 @@ else
 		ft_print_nan_inf_binary64.c \
 	}
 endif
-# fprintf/srcs/print_conversion/80bit
+# dprintf/srcs/print_conversion/80bit
 SRCS += ${addprefix ${FPRINTF_SRCDIR}/print_conversion/80bit/, \
 			ft_conv_e_80bit.c \
 			ft_conv_f_80bit.c \
@@ -135,12 +135,12 @@ ifeq ($(OS), Darwin)
 else
 	SRCS += ${addprefix ${FPRINTF_SRCDIR}/print_conversion/80bit/, ft_print_nan_inf_80bit.c }
 endif
-# fprintf/srcs/print_conversion/float_common_utils
+# dprintf/srcs/print_conversion/float_common_utils
 SRCS += ${addprefix ${FPRINTF_SRCDIR}/print_conversion/float_common_utils/, \
 			ft_array_calc.c \
 			ft_print_exponent.c \
 }
-# fprintf/srcs/print_conversion/wchar_to_utf8
+# dprintf/srcs/print_conversion/wchar_to_utf8
 ifeq ($(OS), Darwin)
 	SRCS += ${addprefix ${FPRINTF_SRCDIR}/print_conversion/wchar_to_utf8/, \
 			ft_conv_lc_darwin.c \
@@ -191,7 +191,7 @@ ${OBJDIR}/%.o: ${SRCDIR}/lst/%.c | ${OBJDIR}
 ${OBJDIR}/%.o: ${GNL_SRCDIR}/%.c | ${OBJDIR}
 	${CC} ${CFLAGS} ${DEPSFLAGS} ${INCLUDE} -c $< -o $@
 
-# fprintf / printf function
+# dprintf / printf function
 ${OBJDIR}/%.o: ${FPRINTF_SRCDIR}/%.c | ${OBJDIR}
 	${CC} ${CFLAGS} ${DEPSFLAGS} ${INCLUDE} -c $< -o $@
 
