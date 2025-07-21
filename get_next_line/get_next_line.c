@@ -5,41 +5,42 @@
 /*                                                    +:+ +:+         +:+     */
 /*   By: stanaka2 < stanaka2@student.42tokyo.jp>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/05/19 16:38:10 by stanaka2          #+#    #+#             */
-/*   Updated: 2025/06/30 16:09:04 by stanaka2         ###   ########.fr       */
+/*   Created: 2025/05/18 00:47:51 by stanaka2          #+#    #+#             */
+/*   Updated: 2025/07/21 19:00:37 by stanaka2         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "get_next_line.h"
 
-static bool	ft_read_file(t_mem *mem, int fd);
-static bool	ft_find_newline(t_mem *mem);
-static char	*ft_get_line(t_mem *mem);
-static void	ft_get_remainder_line(t_mem *mem);
+static bool	ft_read_file(t_gnl_mem *mem, int fd);
+static bool	ft_find_newline(t_gnl_mem *mem);
+static char	*ft_get_line(t_gnl_mem *mem);
+static void	ft_get_remainder_line(t_gnl_mem *mem);
 
 char	*get_next_line(int fd)
 {
-	static t_mem	*mem_list[FD_TABLE_SIZE];
-	t_mem			*mem;
+	static t_gnl_mem	mem;
 	char			*next_line;
 
-	if (fd < 0 || BUFFER_SIZE <= 0 || SSIZE_MAX < BUFFER_SIZE)
-		return (NULL);
-	mem = ft_gnl_get_fd_mem(&mem_list[fd % FD_TABLE_SIZE], fd);
-	if (!mem)
-		return (NULL);
-	if (!ft_read_file(mem, fd))
-		return (ft_gnl_mem_delete(&mem_list[fd % FD_TABLE_SIZE], fd));
-	if (mem->eof && mem->len == 0)
-		return (ft_gnl_mem_delete(&mem_list[fd % FD_TABLE_SIZE], fd));
-	next_line = ft_get_line(mem);
+	if (mem.len != 0)
+	{
+		mem.line = (char *)malloc(mem.len);
+		if (!mem.line)
+			return (ft_gnl_mem_reset(&mem));
+		ft_memcpy(mem.line, mem.remainder_line, mem.len);
+	}
+	if (!ft_read_file(&mem, fd))
+		return (ft_gnl_mem_reset(&mem));
+	if (mem.eof && mem.len == 0)
+		return (ft_gnl_mem_reset(&mem));
+	next_line = ft_get_line(&mem);
 	if (!next_line)
-		return (ft_gnl_mem_delete(&mem_list[fd % FD_TABLE_SIZE], fd));
-	ft_get_remainder_line(mem);
+		return (ft_gnl_mem_reset(&mem));
+	ft_get_remainder_line(&mem);
 	return (next_line);
 }
 
-static bool	ft_read_file(t_mem *mem, int fd)
+static bool	ft_read_file(t_gnl_mem *mem, int fd)
 {
 	char	*buf;
 	ssize_t	res;
@@ -68,7 +69,7 @@ static bool	ft_read_file(t_mem *mem, int fd)
 	return (true);
 }
 
-static bool	ft_find_newline(t_mem *mem)
+static bool	ft_find_newline(t_gnl_mem *mem)
 {
 	size_t	i;
 
@@ -91,7 +92,7 @@ static bool	ft_find_newline(t_mem *mem)
 	return (false);
 }
 
-static char	*ft_get_line(t_mem *mem)
+static char	*ft_get_line(t_gnl_mem *mem)
 {
 	char	*line;
 	size_t	len;
@@ -108,7 +109,7 @@ static char	*ft_get_line(t_mem *mem)
 	return (line);
 }
 
-static void	ft_get_remainder_line(t_mem *mem)
+static void	ft_get_remainder_line(t_gnl_mem *mem)
 {
 	size_t	remainder_len;
 
@@ -118,7 +119,9 @@ static void	ft_get_remainder_line(t_mem *mem)
 		return ;
 	}
 	remainder_len = mem->len - mem->newline_offset - 1;
-	ft_memcpy(mem->line, mem->line + mem->newline_offset + 1, remainder_len);
+	ft_memcpy(mem->remainder_line, mem->line + mem->newline_offset + 1, remainder_len);
 	mem->len = remainder_len;
 	mem->newline_offset = 0;
+	free(mem->line);
+	mem->line = NULL;
 }
