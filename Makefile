@@ -6,224 +6,260 @@
 #    By: stanaka2 < stanaka2@student.42tokyo.jp>    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2025/04/24 21:27:03 by stanaka2          #+#    #+#              #
-#    Updated: 2025/06/30 17:41:11 by stanaka2         ###   ########.fr        #
+#    Updated: 2026/05/13 01:09:52 by stanaka2         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
-NAME = libft.a
-OS = ${shell uname -s}
-CFLAGS = -Wall -Wextra -Werror
-INCLUDE = -I ./includes
+# -------------------------- #
+#       Phony Targets        #
+# -------------------------- #
 
-# libft
-SRCDIR = srcs
-SRCS = ${addprefix ${SRCDIR}/ctype/, \
-	ft_isalnum.c ft_isalpha.c ft_isascii.c ft_isblank.c \
-	ft_iscntrl.c ft_isdigit.c ft_isgraph.c ft_islower.c \
-	ft_isprint.c ft_ispunct.c ft_isspace.c ft_isupper.c \
-	ft_isxdigit.c ft_tolower.c ft_toupper.c \
-	}
-SRCS += ${addprefix ${SRCDIR}/stdio/, \
-	ft_putchar_fd.c ft_putendl_fd.c ft_putnbr_fd.c ft_putstr_fd.c \
-	}
-SRCS += ${addprefix ${SRCDIR}/stdlib/, \
-	ft_abs_uint.c ft_abs_ulong.c ft_atoi.c ft_calloc.c ft_itoa.c \
-	}
-SRCS += ${addprefix ${SRCDIR}/string/, \
-	ft_bzero.c ft_memchr.c ft_memcmp.c ft_memcpy.c ft_memmove.c ft_memset.c \
-	ft_split.c ft_strcat.c ft_strchr.c ft_strcmp.c ft_strcpy.c ft_strdup.c \
-	ft_striteri.c ft_strjoin.c ft_strlcat.c ft_strlcpy.c ft_strlen.c ft_strmapi.c \
-	ft_strncat.c ft_strncmp.c ft_strncpy.c ft_strndup.c ft_strnlen.c ft_strnstr.c \
-	ft_strrchr.c ft_strtrim.c ft_substr.c \
-	}
-SRCS += ${addprefix ${SRCDIR}/lst/, \
-	ft_lstadd_back.c ft_lstadd_front.c ft_lstclear.c ft_lstdelone.c \
-	ft_lstiter.c ft_lstlast.c ft_lstmap.c ft_lstnew.c ft_lstsize.c \
-	}
+.PHONY: all clean fclean re asan debug
+
+# -------------------------- #
+#      Makefile Setting      #
+# -------------------------- #
+
+OS		=	$(shell uname -s)
+
+SHELL   =  	bash
+
+MAKEFLAGS += --no-print-directory
+
+RM = rm -f
+
+# -------------------------- #
+# 　　    　 Target           #
+# -------------------------- #
+
+NAME =	libft.a
+
+# -------------------------- #
+# 　　　Compiler Flags        #
+# -------------------------- #
+
+CFLAGS  =	-Wall -Wextra -Werror
+
+ifeq ($(MAKECMDGOALS), asan)
+CFLAGS +=	-g -fsanitize=address
+endif
+
+ifeq ($(MAKECMDGOALS), debug)
+CFLAGS +=	-g
+endif
+
+# -------------------------- #
+#          Include           #
+# -------------------------- #
+
+INCLUDE_DIR	=	include
+INCLUDE  	=	-I $(INCLUDE_DIR)
+
+# -------------------------- #
+#     Source Directories     #
+# -------------------------- #
+
+SRC_DIR  =	src
+SRC_DIRS =	$(addprefix $(SRC_DIR)/, ctype stdio stdlib string lst math)
+SRC_DIRS +=	$(addprefix $(SRC_DIR)/, get_next_line)
+SRC_DIRS +=	$(addprefix $(SRC_DIR)/, ft_printf \
+				$(addprefix ft_printf/, \
+					print_utils print_utils/utils\
+					read_conversion read_conversion/utils \
+					print_conversion \
+					print_conversion/character print_conversion/character/utils\
+					print_conversion/float print_conversion/float/utils \
+					print_conversion/integer \
+					print_conversion/special \
+				)\
+			)
+
+# -------------------------- #
+#        Source Files        #
+# -------------------------- #
+
+# ctype
+SRCS = ft_isalnum.c ft_isalpha.c ft_isascii.c ft_isblank.c \
+	   ft_iscntrl.c ft_isdigit.c ft_isgraph.c ft_islower.c \
+	   ft_isprint.c ft_ispunct.c ft_isspace.c ft_isupper.c \
+	   ft_isxdigit.c ft_tolower.c ft_toupper.c
+
+# stdio
+SRCS += ft_putchar_fd.c ft_putendl_fd.c ft_putnbr_fd.c ft_putstr_fd.c \
+		ft_putchar_fd_bytes.c ft_putendl_fd_bytes.c ft_putnbr_fd_bytes.c ft_putstr_fd_bytes.c
+
+# stdlib
+SRCS += ft_abs_uint.c ft_abs_ulong.c ft_atof.c ft_atoi.c ft_calloc.c ft_itoa.c ft_reallocf.c
+
+# string
+SRCS += ft_bzero.c ft_memchr.c ft_memcmp.c ft_memcpy.c ft_memmove.c ft_memset.c \
+		ft_split.c ft_strcat.c ft_strchr.c ft_strcmp.c ft_strcpy.c ft_strdup.c \
+		ft_striteri.c ft_strjoin.c ft_strlcat.c ft_strlcpy.c ft_strlen.c ft_strmapi.c \
+		ft_strncat.c ft_strncmp.c ft_strncpy.c ft_strndup.c ft_strnlen.c ft_strnstr.c \
+		ft_strrchr.c ft_strtrim.c ft_substr.c ft_split_set.c
+
+# lst
+SRCS += ft_lstadd_back.c ft_lstadd_front.c ft_lstclear.c ft_lstdelone.c \
+		ft_lstiter.c ft_lstlast.c ft_lstmap.c ft_lstnew.c ft_lstsize.c \
+		ft_lst_push_back.c ft_lst_push_front.c ft_lst_pop_back.c ft_lst_pop_front.c
+
+# math
+SRCS += ft_fabs.c ft_round.c ft_sqrt.c ft_rand_r.c  ft_xorshift.c
 
 # get_next_line
-GNL_SRCDIR = get_next_line
-SRCS += ${addprefix ${GNL_SRCDIR}/, get_next_line.c get_next_line_utils.c }
+SRCS += get_next_line.c
 
-# dprintf / printf function
-FPRINTF_SRCDIR = dprintf
+# ft_printf
 ifeq ($(OS), Darwin)
-	SRCS += ${addprefix ${FPRINTF_SRCDIR}/, ft_dprintf_darwin.c ft_printf_darwin.c }
+SRCS += ft_dprintf_darwin.c ft_printf_darwin.c ft_snprintf_darwin.c \
+		ft_sprintf_darwin.c
 else
-	SRCS += ${addprefix ${FPRINTF_SRCDIR}/, ft_dprintf.c ft_printf.c }
+SRCS += ft_dprintf.c ft_printf.c ft_snprintf.c ft_sprintf.c
 endif
-SRCS += ${addprefix ${FPRINTF_SRCDIR}/, ft_dprintf_utils.c }
-# dprintf/srcs/read_conversion
+
 ifeq ($(OS), Darwin)
-	SRCS += ${addprefix ${FPRINTF_SRCDIR}/read_conversion/, ft_read_conversion_darwin.c }
+SRCS += pf_xprintf_darwin.c
 else
-	SRCS += ${addprefix ${FPRINTF_SRCDIR}/read_conversion/, ft_read_conversion.c }
+SRCS += pf_xprintf.c
 endif
-SRCS += ${addprefix ${FPRINTF_SRCDIR}/read_conversion/, ft_read_conversion_utils.c }
-# dprintf/srcs//print_conversion
-SRCS += ${addprefix ${FPRINTF_SRCDIR}/print_conversion/, \
-			ft_conv_a.c \
-			ft_conv_d_i.c \
-			ft_conv_f_e_g.c \
-			ft_conv_n.c \
-			ft_conv_o.c \
-			ft_conv_u.c \
-			ft_conv_x.c \
-			ft_print_conversion.c \
-			ft_print_conversion_utils.c \
-}
+
+# ft_printf/print_utils
+SRCS += pf_print_char.c  pf_print_hexa_preffix.c  pf_print_padding.c \
+		pf_print_sign.c  pf_print_space_width.c  pf_print_strn.c pf_print_zero_width.c \
+		pf_print_repeated_char.c
+
+# ft_printf/read_conversion
 ifeq ($(OS), Darwin)
-	SRCS += ${addprefix ${FPRINTF_SRCDIR}/print_conversion/, \
-			ft_conv_c_darwin.c \
-			ft_conv_s_darwin.c \
-			ft_conv_p_darwin.c \
-			ft_conv_percent_darwin.c \
-			}
+SRCS += pf_read_conversion_darwin.c
 else
-	SRCS += ${addprefix ${FPRINTF_SRCDIR}/print_conversion/, \
-			ft_conv_c.c \
-			ft_conv_s.c \
-			ft_conv_p.c \
-			ft_conv_percent.c \
-			}
+SRCS += pf_read_conversion.c
 endif
-# dprintf/srcs/print_conversion/binary64
-SRCS += ${addprefix ${FPRINTF_SRCDIR}/print_conversion/binary64/, \
-			ft_conv_e_binary64.c \
-			ft_conv_f_binary64.c \
-			ft_conv_g_binary64.c \
-			ft_convert_to_decimal_binary64.c \
-			ft_convert_to_hex_binary64.c \
-			ft_decode_binary64.c \
-			ft_decode_hex_binary64.c  \
-			ft_get_decimal_exponent_binary64.c \
-			ft_my_double_utils_binary64.c \
-			ft_print_g_exp_notation_binary64.c \
-			ft_print_g_fixed_point_binary64.c \
-			ft_round_binary64.c \
-			ft_round_exp_notation_binary64.c \
-			ft_round_hex_binary64.c \
-}
+SRCS += pf_check_int_overflow.c pf_precision_atoi.c
+
+# ft_printf/print_conversion
+SRCS += pf_print_conversion.c
+
+# ft_printf/print_conversion/character
 ifeq ($(OS), Darwin)
-	SRCS += ${addprefix ${FPRINTF_SRCDIR}/print_conversion/binary64/, \
-		ft_conv_a_binary64_darwin.c \
-		ft_print_nan_inf_binary64_darwin.c \
-		ft_normalize_hex_binary64_darwin.c \
-	}
+SRCS += pf_conv_c_darwin.c pf_conv_s_darwin.c pf_print_null_darwin.c pf_conv_lc_darwin.c 	pf_conv_ls_darwin.c \
+		pf_calc_utf8_len_darwin.c pf_encode_utf8_darwin.c pf_validate_codepoint_darwin.c
 else
-	SRCS += ${addprefix ${FPRINTF_SRCDIR}/print_conversion/binary64/, \
-		ft_conv_a_binary64.c \
-		ft_print_nan_inf_binary64.c \
-	}
+SRCS += pf_conv_c.c pf_conv_s.c pf_print_null.c pf_conv_lc.c pf_conv_ls.c \
+		pf_calc_utf8_len.c pf_encode_utf8.c pf_validate_codepoint.c
 endif
-# dprintf/srcs/print_conversion/80bit
-SRCS += ${addprefix ${FPRINTF_SRCDIR}/print_conversion/80bit/, \
-			ft_conv_e_80bit.c \
-			ft_conv_f_80bit.c \
-			ft_conv_g_80bit.c \
-			ft_convert_to_decimal_80bit.c \
-			ft_decode_80bit.c \
-			ft_get_decimal_exponent_80bit.c \
-			ft_my_double_utils_80bit.c \
-			ft_print_g_exp_notation_80bit.c \
-			ft_print_g_fixed_point_80bit.c \
-			ft_round_80bit.c \
-			ft_round_exp_notation_80bit.c \
-}
+SRCS += pf_print_utf8.c
+
+# ft_printf/print_conversion/integer
+SRCS += pf_conv_d_i.c pf_conv_o.c pf_conv_u.c pf_conv_x.c
+
+# ft_printf/print_conversion/special
+SRCS += pf_conv_n.c
 ifeq ($(OS), Darwin)
-	SRCS += ${addprefix ${FPRINTF_SRCDIR}/print_conversion/80bit/, ft_print_nan_inf_80bit_darwin.c }
+SRCS += pf_conv_p_darwin.c pf_conv_percent_darwin.c
 else
-	SRCS += ${addprefix ${FPRINTF_SRCDIR}/print_conversion/80bit/, ft_print_nan_inf_80bit.c }
+SRCS += pf_conv_p.c pf_conv_percent.c
 endif
-# dprintf/srcs/print_conversion/float_common_utils
-SRCS += ${addprefix ${FPRINTF_SRCDIR}/print_conversion/float_common_utils/, \
-			ft_array_calc.c \
-			ft_print_exponent.c \
-}
-# dprintf/srcs/print_conversion/wchar_to_utf8
+
+# ft_printf/print_conversion/float
+SRCS += pf_conv_e.c pf_convert_to_decimal.c pf_convert_to_hex.c \
+		pf_conv_f.c pf_conv_g.c \
+		pf_decode_binary64.c pf_decode_binary80.c \
+		pf_print_conv_e.c pf_print_conv_f.c \
+		pf_print_conv_g_exp_notation.c pf_print_conv_g_fixed_point_notation.c \
+		pf_round_to_nearest_even.c
 ifeq ($(OS), Darwin)
-	SRCS += ${addprefix ${FPRINTF_SRCDIR}/print_conversion/wchar_to_utf8/, \
-			ft_conv_lc_darwin.c \
-			ft_conv_ls_darwin.c \
-	}
+SRCS += pf_conv_a_darwin.c pf_print_conv_a_darwin.c
 else
-	SRCS += ${addprefix ${FPRINTF_SRCDIR}/print_conversion/wchar_to_utf8/, \
-			ft_conv_lc.c \
-			ft_conv_ls.c \
-	}
+SRCS += pf_conv_a.c pf_print_conv_a.c
 endif
-SRCS += ${addprefix ${FPRINTF_SRCDIR}/print_conversion/wchar_to_utf8/, ft_utf8_utils.c }
 
-OBJDIR = objs
-OBJS = ${addprefix ${OBJDIR}/, ${notdir ${SRCS:.c=.o}}}
+# ft_printf/print_conversion/float/utils
+SRCS += pf_calc_array.c pf_get_decimal_exponent.c pf_print_exponent.c pf_t_float_utils.c
+ifeq ($(OS), Darwin)
+SRCS += pf_print_inf_darwin.c pf_print_nan_darwin.c
+else
+SRCS += pf_print_inf.c pf_print_nan.c
+endif
 
-DEPSFLAGS	= -MMD
-DEPS	= ${addprefix ${OBJDIR}/, ${notdir ${SRCS:.c=.d}}}
+# -------------------------- #
+#    ANSI Escape Sequence    #
+# -------------------------- #
 
-all: ${NAME}
+DEF_COLOR	= \033[0;39m
+GRAY 		= \033[0;90m
+RED 		= \033[0;91m
+GREEN 		= \033[0;92m
+YELLOW 		= \033[0;93m
+BLUE 		= \033[0;94m
+MAGENTA 	= \033[0;95m
+CYAN 		= \033[0;96m
+WHITE 		= \033[0;97m
 
-${NAME} : ${OBJS}
-	${AR} rcs $@ $?
+# -------------------------- #
+#        VPATH Setup         #
+# -------------------------- #
 
-${OBJDIR}:
-	-mkdir -p ${OBJDIR}
+$(foreach dir,$(SRC_DIRS), $(eval vpath %.c $(dir)))
 
-# libft
-${OBJDIR}/%.o: ${SRCDIR}/ctype/%.c | ${OBJDIR}
-	${CC} ${CFLAGS} ${DEPSFLAGS} ${INCLUDE} -c $< -o $@
+# -------------------------- #
+#     Object & Dependency    #
+# -------------------------- #
 
-${OBJDIR}/%.o: ${SRCDIR}/stdio/%.c | ${OBJDIR}
-	${CC} ${CFLAGS} ${DEPSFLAGS} ${INCLUDE} -c $< -o $@
+OBJ_DIR		=	.obj
+OBJS		=	$(patsubst %.c, $(OBJ_DIR)/%.o, $(notdir $(SRCS)))
 
-${OBJDIR}/%.o: ${SRCDIR}/stdio/printf/%.c | ${OBJDIR}
-	${CC} ${CFLAGS} ${DEPSFLAGS} ${INCLUDE} -c $< -o $@
+DEP_DIR		=	.dep
+DEPFLAGS	=	-MT $@ -MMD -MP -MF $(DEP_DIR)/$*.d
+DEPS		=	$(patsubst %.c, $(DEP_DIR)/%.d, $(notdir $(SRCS)))
 
-${OBJDIR}/%.o: ${SRCDIR}/stdlib/%.c | ${OBJDIR}
-	${CC} ${CFLAGS} ${DEPSFLAGS} ${INCLUDE} -c $< -o $@
+# -------------------------- #
+#         Main Targets       #
+# -------------------------- #
 
-${OBJDIR}/%.o: ${SRCDIR}/string/%.c | ${OBJDIR}
-	${CC} ${CFLAGS} ${DEPSFLAGS} ${INCLUDE} -c $< -o $@
+all: $(NAME)
 
-${OBJDIR}/%.o: ${SRCDIR}/lst/%.c | ${OBJDIR}
-	${CC} ${CFLAGS} ${DEPSFLAGS} ${INCLUDE} -c $< -o $@
+$(NAME): $(OBJS)
+	@$(AR) rcs $@ $?
+	@echo -e "[LIBFT] $(GREEN)Build Complete:$(DEF_COLOR) $@"
 
-# get_next_line
-${OBJDIR}/%.o: ${GNL_SRCDIR}/%.c | ${OBJDIR}
-	${CC} ${CFLAGS} ${DEPSFLAGS} ${INCLUDE} -c $< -o $@
+# -------------------------- #
+#         Debug Rules        #
+# -------------------------- #
 
-# dprintf / printf function
-${OBJDIR}/%.o: ${FPRINTF_SRCDIR}/%.c | ${OBJDIR}
-	${CC} ${CFLAGS} ${DEPSFLAGS} ${INCLUDE} -c $< -o $@
+asan: $(NAME)
+debug:  $(NAME)
 
-${OBJDIR}/%.o: ${FPRINTF_SRCDIR}/read_conversion/%.c | ${OBJDIR}
-	${CC} ${CFLAGS} ${DEPSFLAGS} ${INCLUDE} -c $< -o $@
+# -------------------------- #
+#        Build Rules         #
+# -------------------------- #
 
-${OBJDIR}/%.o: ${FPRINTF_SRCDIR}/print_conversion/%.c | ${OBJDIR}
-	${CC} ${CFLAGS} ${DEPSFLAGS} ${INCLUDE} -c $< -o $@
+$(OBJ_DIR)/%.o: %.c | $(OBJ_DIR) $(DEP_DIR)
+	@$(CC) $(CFLAGS) $(INCLUDE) $(DEPFLAGS) -c $< -o $@
 
-${OBJDIR}/%.o: ${FPRINTF_SRCDIR}/print_conversion/%.c | ${OBJDIR}
-	${CC} ${CFLAGS} ${DEPSFLAGS} ${INCLUDE} -c $< -o $@
+$(OBJ_DIR):
+	@-mkdir -p $@
 
-${OBJDIR}/%.o: ${FPRINTF_SRCDIR}/print_conversion/binary64/%.c | ${OBJDIR}
-	${CC} ${CFLAGS} ${DEPSFLAGS} ${INCLUDE} -c $< -o $@
+$(DEP_DIR):
+	@-mkdir -p $@
 
-${OBJDIR}/%.o: ${FPRINTF_SRCDIR}/print_conversion/80bit/%.c | ${OBJDIR}
-	${CC} ${CFLAGS} ${DEPSFLAGS} ${INCLUDE} -c $< -o $@
-
-${OBJDIR}/%.o: ${FPRINTF_SRCDIR}/print_conversion/float_common_utils/%.c | ${OBJDIR}
-	${CC} ${CFLAGS} ${DEPSFLAGS} ${INCLUDE} -c $< -o $@
-
-${OBJDIR}/%.o: ${FPRINTF_SRCDIR}/print_conversion/wchar_to_utf8/%.c | ${OBJDIR}
-	${CC} ${CFLAGS} ${DEPSFLAGS} ${INCLUDE} -c $< -o $@
+# -------------------------- #
+#       Cleanup Rules        #
+# -------------------------- #
 
 clean:
-	${RM} ${OBJS} ${DEPS}
+	@$(RM) $(OBJS) $(DEPS)
+	@echo -e "[LIBFT] $(BLUE)Deleted Compiled Files$(DEF_COLOR): *.o *.d"
 
-fclean: clean
-	${RM} -r $(NAME) ${OBJDIR}
+fclean:
+	@$(RM) $(OBJS) $(DEPS)
+	@echo -e "[LIBFT] $(BLUE)Deleted Compiled Files$(DEF_COLOR): *.o *.d"
+	@$(RM) -r $(NAME) $(OBJ_DIR) $(DEP_DIR)
+	@echo -e "[LIBFT] $(BLUE)Deleted Target File and Object File Dir$(DEF_COLOR): $(NAME) $(OBJ_DIR) $(DEP_DIR)"
 
 re: fclean all
 
--include $(DEPS)
+# -------------------------- #
+#  Include Dependency Files  #
+# -------------------------- #
 
-.PHONY: all bonus clean fclean re
+-include $(DEPS)
