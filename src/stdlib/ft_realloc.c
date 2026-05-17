@@ -1,27 +1,28 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_memcpy.c                                        :+:      :+:    :+:   */
+/*   ft_realloc.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: stanaka2 <stanaka2@student.42tokyo.jp>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/04/25 12:18:02 by stanaka2          #+#    #+#             */
-/*   Updated: 2026/05/17 13:13:58 by stanaka2         ###   ########.fr       */
+/*   Created: 2026/05/17 12:30:20 by stanaka2          #+#    #+#             */
+/*   Updated: 2026/05/17 12:32:14 by stanaka2         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include <stddef.h>
+#include "libft.h"
 
-void	*ft_memcpy(void *dst, const void *src, size_t n)
+void	*ft_realloc(void *ptr, size_t old_size, size_t new_size)
 {
-	unsigned char		*d;
-	const unsigned char	*s;
+	void	*new_ptr;
 
-	if (n == 0 || dst == src)
-		return (dst);
-	d = dst;
-	s = src;
-	while (n--)
-		*d++ = *s++;
-	return (dst);
+	new_ptr = malloc(new_size);
+	if (new_ptr == NULL)
+		return (NULL);
+	if (old_size <= new_size)
+		ft_memcpy(new_ptr, ptr, old_size);
+	else
+		ft_memcpy(new_ptr, ptr, new_size);
+	free(ptr);
+	return (new_ptr);
 }
