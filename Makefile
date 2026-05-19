@@ -6,7 +6,7 @@
 #    By: stanaka2 <stanaka2@student.42tokyo.jp>     +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2025/04/24 21:27:03 by stanaka2          #+#    #+#              #
-#    Updated: 2026/05/19 12:07:07 by stanaka2         ###   ########.fr        #
+#    Updated: 2026/05/20 00:04:14 by stanaka2         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -14,7 +14,7 @@
 #       Phony Targets        #
 # -------------------------- #
 
-.PHONY: all clean fclean re san debug
+.PHONY: all clean fclean re san debug norm
 
 # -------------------------- #
 #      Makefile Setting      #
@@ -22,16 +22,18 @@
 
 OS := $(shell uname -s)
 
-SHELL := bash
+override MAKEFLAGS += -j --no-print-directory
 
-MAKEFLAGS += --no-print-directory
+override .DEFAULT_GOAL := all
 
-RM := rm -f
+.DEFAULT:
+	@printf "No match.\n"
 
 .DELETE_ON_ERROR:
-.NOTPARALLEL: re
+# GNU Make 4.4
+# .NOTPARALLEL: re
 # .IGNORE:
-.SILENT: clean fclean
+# .SILENT: clean fclean
 
 # -------------------------- #
 # 　　    　 Target           #
@@ -43,32 +45,35 @@ NAME := libft.a
 # 　　　Compiler Flags        #
 # -------------------------- #
 
-CFLAGS := -Wall -Wextra -Werror
-CFLAGS += -Wconversion -Wno-sign-conversion
+CC := cc
+
+override CFLAGS += -Wall -Wextra -Werror
+override CFLAGS += -Wconversion -Wno-sign-conversion
 
 ifeq ($(MAKECMDGOALS), san)
-CFLAGS += -g -fsanitize=address,undefined
+override CFLAGS += -g -fsanitize=address,undefined
 endif
 
 ifeq ($(MAKECMDGOALS), debug)
-CFLAGS += -g
+override CFLAGS += -g
 endif
+
+override ARFLAGS := rcs
 
 # -------------------------- #
 #          Include           #
 # -------------------------- #
 
-INCLUDE_DIR := include
-INCLUDE := -I $(INCLUDE_DIR)
+INCLUDE_DIRS := include
+override CPPFLAGS += $(foreach dir, $(INCLUDE_DIRS), -I$(INCLUDE_DIRS))
 
 # -------------------------- #
 #     Source Directories     #
 # -------------------------- #
 
-SRC_DIR := src
-SRC_DIRS := $(addprefix $(SRC_DIR)/, ctype stdio stdlib string lst math)
-SRC_DIRS += $(addprefix $(SRC_DIR)/, get_next_line)
-SRC_DIRS += $(addprefix $(SRC_DIR)/, ft_printf \
+SRC_DIRS := $(addprefix src/, ctype stdio stdlib string lst math)
+SRC_DIRS += $(addprefix src/, get_next_line)
+SRC_DIRS += $(addprefix src/, ft_printf \
 				$(addprefix ft_printf/, \
 					print_utils print_utils/utils\
 					read_conversion read_conversion/utils \
@@ -209,15 +214,28 @@ WHITE := \033[0;97m
 $(foreach dir,$(SRC_DIRS), $(eval vpath %.c $(dir)))
 
 # -------------------------- #
-#     Object & Dependency    #
+#        Object Files        #
 # -------------------------- #
 
-OBJ_DIR		=	.obj
-OBJS		=	$(patsubst %.c, $(OBJ_DIR)/%.o, $(SRCS))
+OBJ_DIR		:=	.obj
+$(OBJ_DIR):
+	@-mkdir -p $@
 
-DEP_DIR		=	.dep
-DEPFLAGS	=	-MT $@ -MMD -MP -MF $(DEP_DIR)/$*.d
-DEPS		=	$(patsubst %.c, $(DEP_DIR)/%.d, $(SRCS))
+OBJS		:=	$(patsubst %.c, $(OBJ_DIR)/%.o, $(SRCS))
+
+# -------------------------- #
+#      Dependency Files      #
+# -------------------------- #
+
+DEP_DIR		:=	.dep
+$(DEP_DIR):
+	@-mkdir -p $@
+
+DEPS		:=	$(patsubst %.c, $(DEP_DIR)/%.d, $(SRCS))
+override DEPFLAGS = -MT $@ -MMD -MP -MF $(DEP_DIR)/$*.d
+
+-include $(DEPS)
+$(DEP_DIR)/%.d: ;
 
 # -------------------------- #
 #      Default Targets       #
@@ -226,8 +244,15 @@ DEPS		=	$(patsubst %.c, $(DEP_DIR)/%.d, $(SRCS))
 all: $(NAME)
 
 $(NAME): $(OBJS)
-	@$(AR) rcs $@ $?
-	@echo -e "[LIBFT] $(GREEN)Build Complete:$(DEF_COLOR) $@"
+	@$(AR) $(ARFLAGS) $@ $?
+	@printf "[LIBFT] $(GREEN)Build Complete:$(DEF_COLOR) $@\n"
+
+# -------------------------- #
+#        Build Rules         #
+# -------------------------- #
+
+$(OBJ_DIR)/%.o: %.c | $(OBJ_DIR) $(DEP_DIR)
+	@$(CC) $(CFLAGS) $(CPPFLAGS) $(DEPFLAGS) -c $< -o $@
 
 # -------------------------- #
 #         Debug Rules        #
@@ -235,37 +260,23 @@ $(NAME): $(OBJS)
 
 san debug: $(NAME)
 
-# -------------------------- #
-#        Build Rules         #
-# -------------------------- #
-
-$(OBJ_DIR)/%.o: %.c | $(OBJ_DIR) $(DEP_DIR)
-	@$(CC) $(CFLAGS) $(INCLUDE) $(DEPFLAGS) -c $< -o $@
-
-$(OBJ_DIR):
-	@-mkdir -p $@
-
-$(DEP_DIR):
-	@-mkdir -p $@
+norm:
+	@norminette src include
 
 # -------------------------- #
 #       Cleanup Rules        #
 # -------------------------- #
 
 clean:
-	$(RM) $(OBJS) $(DEPS)
-	echo -e "[LIBFT] $(BLUE)Deleted Compiled Files$(DEF_COLOR): *.o *.d"
+	@$(RM) $(OBJS) $(DEPS)
+	@printf "[LIBFT] $(BLUE)Deleted Compiled Files$(DEF_COLOR): *.o *.d\n"
 
 fclean:
-	$(RM) $(OBJS) $(DEPS)
-	echo -e "[LIBFT] $(BLUE)Deleted Compiled Files$(DEF_COLOR): *.o *.d"
-	$(RM) -r $(NAME) $(OBJ_DIR) $(DEP_DIR)
-	echo -e "[LIBFT] $(BLUE)Deleted Target File and Object File Dir$(DEF_COLOR): $(NAME) $(OBJ_DIR) $(DEP_DIR)"
+	@$(RM) $(OBJS) $(DEPS)
+	@printf "[LIBFT] $(BLUE)Deleted Compiled Files$(DEF_COLOR): *.o *.d\n"
+	@$(RM) -r $(NAME) $(OBJ_DIR) $(DEP_DIR)
+	@printf "[LIBFT] $(BLUE)Deleted Target File and Object File Dir$(DEF_COLOR): $(NAME) $(OBJ_DIR) $(DEP_DIR)\n"
 
-re: fclean all
-
-# -------------------------- #
-#  Include Dependency Files  #
-# -------------------------- #
-
--include $(DEPS)
+re:
+	@$(MAKE) fclean
+	@$(MAKE) all
