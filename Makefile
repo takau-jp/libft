@@ -6,7 +6,7 @@
 #    By: stanaka2 <stanaka2@student.42tokyo.jp>     +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2025/04/24 21:27:03 by stanaka2          #+#    #+#              #
-#    Updated: 2026/05/20 10:00:20 by stanaka2         ###   ########.fr        #
+#    Updated: 2026/05/20 12:20:23 by stanaka2         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -36,13 +36,13 @@ override .DEFAULT_GOAL := all
 # .SILENT: clean fclean
 
 # -------------------------- #
-# 　　    　 Target           #
+#           Target           #
 # -------------------------- #
 
 NAME := libft.a
 
 # -------------------------- #
-# 　　　Compiler Flags        #
+#       Compiler Flags       #
 # -------------------------- #
 
 CC := cc
@@ -65,6 +65,7 @@ override ARFLAGS := rcs
 # -------------------------- #
 
 INCLUDE_DIRS := include
+
 override CPPFLAGS += $(foreach dir, $(INCLUDE_DIRS), -I$(INCLUDE_DIRS))
 
 # -------------------------- #
@@ -199,21 +200,23 @@ endif
 #        Object Files        #
 # -------------------------- #
 
-OBJ_DIR		:=	.obj
+OBJ_DIR := .obj
+
 $(OBJ_DIR):
 	@-mkdir -p $@
 
-OBJS		:=	$(patsubst %.c, $(OBJ_DIR)/%.o, $(SRCS))
+OBJS := $(patsubst %.c, $(OBJ_DIR)/%.o, $(SRCS))
 
 # -------------------------- #
 #      Dependency Files      #
 # -------------------------- #
 
-DEP_DIR		:=	.dep
+DEP_DIR := .dep
+
 $(DEP_DIR):
 	@-mkdir -p $@
 
-DEPS		:=	$(patsubst %.c, $(DEP_DIR)/%.d, $(SRCS))
+DEPS := $(patsubst %.c, $(DEP_DIR)/%.d, $(SRCS))
 override DEPFLAGS = -MT $@ -MMD -MP -MF $(DEP_DIR)/$*.d
 
 -include $(DEPS)
@@ -233,31 +236,31 @@ $(OBJ_DIR)/%.o: %.c | $(OBJ_DIR) $(DEP_DIR)
 	@$(CC) $(CFLAGS) $(CPPFLAGS) $(DEPFLAGS) -c $< -o $@
 
 # -------------------------- #
+#       Cleanup Rules        #
+# -------------------------- #
+
+clean:
+	@$(RM) $(OBJS) $(DEPS)
+	@printf "[LIBFT] $(BLUE)Delete Complete$(DEF_COLOR): *.o *.d\n"
+
+fclean:
+	@$(RM) $(OBJS) $(DEPS)
+	@printf "[LIBFT] $(BLUE)Delete Complete$(DEF_COLOR): *.o *.d\n"
+	@$(RM) -r $(NAME) $(OBJ_DIR) $(DEP_DIR)
+	@printf "[LIBFT] $(BLUE)Delete Complete$(DEF_COLOR): $(NAME) $(OBJ_DIR) $(DEP_DIR)\n"
+
+re:
+	@$(MAKE) fclean
+	@$(MAKE) all
+
+# -------------------------- #
 #         Debug Rules        #
 # -------------------------- #
 
 san debug: $(NAME)
 
 norm:
-	@norminette src include
-
-# -------------------------- #
-#       Cleanup Rules        #
-# -------------------------- #
-
-clean:
-	@$(RM) $(OBJS) $(DEPS)
-	@printf "[LIBFT] $(BLUE)Deleted Compiled Files$(DEF_COLOR): *.o *.d\n"
-
-fclean:
-	@$(RM) $(OBJS) $(DEPS)
-	@printf "[LIBFT] $(BLUE)Deleted Compiled Files$(DEF_COLOR): *.o *.d\n"
-	@$(RM) -r $(NAME) $(OBJ_DIR) $(DEP_DIR)
-	@printf "[LIBFT] $(BLUE)Deleted Target File and Object File Dir$(DEF_COLOR): $(NAME) $(OBJ_DIR) $(DEP_DIR)\n"
-
-re:
-	@$(MAKE) fclean
-	@$(MAKE) all
+	@norminette -o src include $(LIBFT_DIR) | grep Error || true
 
 # -------------------------- #
 #    ANSI Escape Sequence    #
