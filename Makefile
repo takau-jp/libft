@@ -6,7 +6,7 @@
 #    By: stanaka2 <stanaka2@student.42tokyo.jp>     +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2025/04/24 21:27:03 by stanaka2          #+#    #+#              #
-#    Updated: 2026/05/20 12:20:23 by stanaka2         ###   ########.fr        #
+#    Updated: 2026/05/20 17:14:08 by stanaka2         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -14,7 +14,7 @@
 #       Phony Targets        #
 # -------------------------- #
 
-.PHONY: all clean fclean re san debug norm
+.PHONY: all clean fclean re san debug norm help
 
 # -------------------------- #
 #      Makefile Setting      #
@@ -27,13 +27,25 @@ override MAKEFLAGS += -j --no-print-directory
 override .DEFAULT_GOAL := all
 
 .DEFAULT:
-	@printf "No match.\n"
+	@printf "$(RED)make: *** No rule to make target '$@'.  Stop.$(DEF_COLOR)\n"
+	@$(MAKE) help;
+	@exit 2
 
 .DELETE_ON_ERROR:
 # GNU Make 4.4
 # .NOTPARALLEL: re
 # .IGNORE:
 # .SILENT: clean fclean
+
+help:
+	@printf "$(CYAN)Usage:$(DEF_COLOR)\n"
+	@printf "$(GREEN)all$(DEF_COLOR)        Build $(NAME)\n"
+	@printf "$(GREEN)clean$(DEF_COLOR)      Remove object files, dependency files\n"
+	@printf "$(GREEN)fclean$(DEF_COLOR)     Remove all generated files\n"
+	@printf "$(GREEN)re$(DEF_COLOR)         Rebuild from scratch\n"
+	@printf "$(YELLOW)san$(DEF_COLOR)        Build with Sanitizer=Address,Undefine\n"
+	@printf "$(YELLOW)debug$(DEF_COLOR)      Build with debug symbols\n"
+	@printf "$(YELLOW)norm$(DEF_COLOR)       Run norminette\n"
 
 # -------------------------- #
 #           Target           #
@@ -52,9 +64,7 @@ override CFLAGS += -Wconversion -Wno-sign-conversion
 
 ifeq ($(MAKECMDGOALS), san)
 override CFLAGS += -g -fsanitize=address,undefined
-endif
-
-ifeq ($(MAKECMDGOALS), debug)
+else ifeq ($(MAKECMDGOALS), debug)
 override CFLAGS += -g
 endif
 
