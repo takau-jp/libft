@@ -6,7 +6,7 @@
 #    By: stanaka2 <stanaka2@student.42tokyo.jp>     +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2025/04/24 21:27:03 by stanaka2          #+#    #+#              #
-#    Updated: 2026/05/20 00:04:14 by stanaka2         ###   ########.fr        #
+#    Updated: 2026/05/20 10:00:20 by stanaka2         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -84,6 +84,9 @@ SRC_DIRS += $(addprefix src/, ft_printf \
 					print_conversion/special \
 				)\
 			)
+
+# vpath %.c <dir>
+$(foreach dir,$(SRC_DIRS), $(eval vpath %.c $(dir)))
 
 # -------------------------- #
 #        Source Files        #
@@ -193,27 +196,6 @@ SRCS += pf_print_inf.c pf_print_nan.c
 endif
 
 # -------------------------- #
-#    ANSI Escape Sequence    #
-# -------------------------- #
-
-DEF_COLOR := \033[0;39m
-GRAY := \033[0;90m
-RED := \033[0;91m
-GREEN := \033[0;92m
-YELLOW := \033[0;93m
-BLUE := \033[0;94m
-MAGENTA := \033[0;95m
-CYAN := \033[0;96m
-WHITE := \033[0;97m
-
-# -------------------------- #
-#        VPATH Setup         #
-# -------------------------- #
-
-# vpath %.c <dir>
-$(foreach dir,$(SRC_DIRS), $(eval vpath %.c $(dir)))
-
-# -------------------------- #
 #        Object Files        #
 # -------------------------- #
 
@@ -238,7 +220,7 @@ override DEPFLAGS = -MT $@ -MMD -MP -MF $(DEP_DIR)/$*.d
 $(DEP_DIR)/%.d: ;
 
 # -------------------------- #
-#      Default Targets       #
+#        Build Rules         #
 # -------------------------- #
 
 all: $(NAME)
@@ -246,10 +228,6 @@ all: $(NAME)
 $(NAME): $(OBJS)
 	@$(AR) $(ARFLAGS) $@ $?
 	@printf "[LIBFT] $(GREEN)Build Complete:$(DEF_COLOR) $@\n"
-
-# -------------------------- #
-#        Build Rules         #
-# -------------------------- #
 
 $(OBJ_DIR)/%.o: %.c | $(OBJ_DIR) $(DEP_DIR)
 	@$(CC) $(CFLAGS) $(CPPFLAGS) $(DEPFLAGS) -c $< -o $@
@@ -280,3 +258,17 @@ fclean:
 re:
 	@$(MAKE) fclean
 	@$(MAKE) all
+
+# -------------------------- #
+#    ANSI Escape Sequence    #
+# -------------------------- #
+
+DEF_COLOR := \033[0;39m
+GRAY := \033[0;90m
+RED := \033[0;91m
+GREEN := \033[0;92m
+YELLOW := \033[0;93m
+BLUE := \033[0;94m
+MAGENTA := \033[0;95m
+CYAN := \033[0;96m
+WHITE := \033[0;97m
