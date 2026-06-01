@@ -6,11 +6,12 @@
 /*   By: stanaka2 <stanaka2@student.42tokyo.jp>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/11/10 19:49:57 by stanaka2          #+#    #+#             */
-/*   Updated: 2026/05/18 20:45:48 by stanaka2         ###   ########.fr       */
+/*   Updated: 2026/06/01 21:29:17 by stanaka2         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "ft_printf/ft_printf.h"
+#include "ft_printf/pf_defines.h"
 
 int	ft_sprintf(char *str, const char *format, ...)
 {

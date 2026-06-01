@@ -6,11 +6,12 @@
 /*   By: stanaka2 <stanaka2@student.42tokyo.jp>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/05/01 12:34:34 by stanaka2          #+#    #+#             */
-/*   Updated: 2026/05/01 12:38:35 by stanaka2         ###   ########.fr       */
+/*   Updated: 2026/06/01 21:25:12 by stanaka2         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "ft_printf/ft_printf.h"
+#include "ft_printf/pf_defines.h"
 
 void	pf_print_repeated_char(t_ctx *ctx, char c, size_t count)
 {

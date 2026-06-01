@@ -6,11 +6,13 @@
 /*   By: stanaka2 <stanaka2@student.42tokyo.jp>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/04/26 17:27:23 by stanaka2          #+#    #+#             */
-/*   Updated: 2026/05/01 19:03:10 by stanaka2         ###   ########.fr       */
+/*   Updated: 2026/06/01 21:28:53 by stanaka2         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "ft_printf/ft_printf.h"
+#include "ft_printf/pf_defines.h"
+#include "./read_conversion_internal.h"
 
 static void	read_flags(const char **format, t_conv *conv);
 static bool	read_width(\
