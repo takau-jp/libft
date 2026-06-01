@@ -6,7 +6,7 @@
 #    By: stanaka2 <stanaka2@student.42tokyo.jp>     +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2025/04/24 21:27:03 by stanaka2          #+#    #+#              #
-#    Updated: 2026/05/20 17:14:08 by stanaka2         ###   ########.fr        #
+#    Updated: 2026/06/01 09:44:48 by stanaka2         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -22,7 +22,7 @@
 
 OS := $(shell uname -s)
 
-override MAKEFLAGS += -j --no-print-directory
+override MAKEFLAGS += --no-print-directory
 
 override .DEFAULT_GOAL := all
 
@@ -44,8 +44,15 @@ help:
 	@printf "$(GREEN)fclean$(DEF_COLOR)     Remove all generated files\n"
 	@printf "$(GREEN)re$(DEF_COLOR)         Rebuild from scratch\n"
 	@printf "$(YELLOW)san$(DEF_COLOR)        Build with Sanitizer=Address,Undefine\n"
-	@printf "$(YELLOW)debug$(DEF_COLOR)      Build with debug symbols\n"
+	@printf "$(YELLOW)debug$(DEF_COLOR)      Build with -g debug symbols\n"
 	@printf "$(YELLOW)norm$(DEF_COLOR)       Run norminette\n"
+
+# -------------------------- #
+#         Extra Flags        #
+# -------------------------- #
+
+EXTRA_CFLAGS	:= $(CFLAGS)
+EXTRA_CPPFLAGS	:= $(CPPFLAGS)
 
 # -------------------------- #
 #           Target           #
@@ -60,13 +67,7 @@ NAME := libft.a
 CC := cc
 
 override CFLAGS += -Wall -Wextra -Werror
-override CFLAGS += -Wconversion -Wno-sign-conversion
-
-ifeq ($(MAKECMDGOALS), san)
-override CFLAGS += -g -fsanitize=address,undefined
-else ifeq ($(MAKECMDGOALS), debug)
-override CFLAGS += -g
-endif
+override CFLAGS += -Wconversion -Wno-sign-conversion -Wshadow
 
 override ARFLAGS := rcs
 
@@ -76,7 +77,7 @@ override ARFLAGS := rcs
 
 INCLUDE_DIRS := include
 
-override CPPFLAGS += $(foreach dir, $(INCLUDE_DIRS), -I$(INCLUDE_DIRS))
+override CPPFLAGS += $(foreach dir, $(INCLUDE_DIRS), -I$(dir))
 
 # -------------------------- #
 #     Source Directories     #
@@ -267,7 +268,11 @@ re:
 #         Debug Rules        #
 # -------------------------- #
 
-san debug: $(NAME)
+san:
+	@$(MAKE) re CPPFLAGS='$(EXTRA_CPPFLAGS) -g -fsanitize=address,undefined'
+
+debug:
+	@$(MAKE) re CPPFLAGS='$(EXTRA_CPPFLAGS) -g'
 
 norm:
 	@norminette -o src include $(LIBFT_DIR) | grep Error || true
