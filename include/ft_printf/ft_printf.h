@@ -6,7 +6,7 @@
 /*   By: stanaka2 <stanaka2@student.42tokyo.jp>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/22 02:16:43 by stanaka2          #+#    #+#             */
-/*   Updated: 2026/06/01 22:07:30 by stanaka2         ###   ########.fr       */
+/*   Updated: 2026/06/01 22:10:23 by stanaka2         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,8 +16,6 @@
 # include <stddef.h>
 # include <stdbool.h>
 # include <stdarg.h>
-
-# include "libft.h"
 
 # include "ft_printf/pf_types.h"
 

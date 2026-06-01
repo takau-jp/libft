@@ -6,10 +6,13 @@
 /*   By: stanaka2 <stanaka2@student.42tokyo.jp>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/04/26 17:42:06 by stanaka2          #+#    #+#             */
-/*   Updated: 2026/06/01 21:40:53 by stanaka2         ###   ########.fr       */
+/*   Updated: 2026/06/01 22:26:52 by stanaka2         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
+#include <stdint.h>
+
+#include "ft_string.h"
 #include "ft_printf/ft_printf.h"
 #include "ft_printf/pf_print_utils.h"
 

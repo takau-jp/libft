@@ -6,12 +6,13 @@
 /*   By: stanaka2 <stanaka2@student.42tokyo.jp>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/04/23 02:07:29 by stanaka2          #+#    #+#             */
-/*   Updated: 2026/06/01 22:00:35 by stanaka2         ###   ########.fr       */
+/*   Updated: 2026/06/01 22:17:04 by stanaka2         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <stdlib.h>
 
+#include "ft_stdlib.h"
 #include "ft_printf/ft_printf.h"
 #include "./float_internal.h"
 
