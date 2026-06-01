@@ -6,7 +6,7 @@
 /*   By: stanaka2 <stanaka2@student.42tokyo.jp>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/04/26 17:39:16 by stanaka2          #+#    #+#             */
-/*   Updated: 2026/06/01 21:38:59 by stanaka2         ###   ########.fr       */
+/*   Updated: 2026/06/01 22:49:43 by stanaka2         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,7 +20,7 @@ void	pf_conv_c(va_list *ap, t_ctx *ctx, t_conv *conv)
 	c = va_arg(*ap, int);
 	if (conv->width_flags != '-')
 		pf_print_space_width(ctx, conv, 1);
-	pf_print_char(ctx, c);
+	pf_print_char(ctx, (char)c);
 	if (conv->width_flags == '-')
 		pf_print_space_width(ctx, conv, 1);
 }
