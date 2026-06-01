@@ -6,13 +6,14 @@
 /*   By: stanaka2 <stanaka2@student.42tokyo.jp>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/04/19 15:32:36 by stanaka2          #+#    #+#             */
-/*   Updated: 2026/06/01 10:32:17 by stanaka2         ###   ########.fr       */
+/*   Updated: 2026/06/01 22:57:31 by stanaka2         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef FT_STDIO_H
 # define FT_STDIO_H
 
+# include <stddef.h>
 # include <unistd.h>
 
 void	ft_putchar_fd(char c, int fd);

@@ -6,14 +6,12 @@
 /*   By: stanaka2 <stanaka2@student.42tokyo.jp>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/24 21:58:34 by stanaka2          #+#    #+#             */
-/*   Updated: 2026/06/01 10:34:08 by stanaka2         ###   ########.fr       */
+/*   Updated: 2026/06/01 22:56:57 by stanaka2         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef LIBFT_H
 # define LIBFT_H
-
-# include <stddef.h>
 
 // libft
 # include "ft_ctype.h"
