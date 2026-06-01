@@ -6,7 +6,7 @@
 /*   By: stanaka2 <stanaka2@student.42tokyo.jp>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/04/21 10:52:51 by stanaka2          #+#    #+#             */
-/*   Updated: 2026/06/01 22:14:10 by stanaka2         ###   ########.fr       */
+/*   Updated: 2026/06/01 22:54:43 by stanaka2         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,6 @@
 
 #include "ft_string.h"
 #include "ft_stdlib.h"
-#include "ft_printf/ft_printf.h"
 #include "../float_internal.h"
 
 static void	set_binary64_metadata(t_pf_float *fp, uint8_t base);
