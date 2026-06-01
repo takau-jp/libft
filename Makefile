@@ -6,7 +6,7 @@
 #    By: stanaka2 <stanaka2@student.42tokyo.jp>     +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2025/04/24 21:27:03 by stanaka2          #+#    #+#              #
-#    Updated: 2026/06/01 23:21:23 by stanaka2         ###   ########.fr        #
+#    Updated: 2026/06/01 23:38:57 by stanaka2         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -38,7 +38,7 @@ EXTRA_FLAGS :=	MAKEFLAGS='$(MAKEFLAGS)' \
 
 OS := $(shell uname -s)
 
-override MAKEFLAGS += --no-print-directory
+override MAKEFLAGS += -j --no-print-directory
 
 override .DEFAULT_GOAL := all
 
