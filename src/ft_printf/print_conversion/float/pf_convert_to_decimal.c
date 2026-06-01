@@ -6,9 +6,11 @@
 /*   By: stanaka2 <stanaka2@student.42tokyo.jp>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/04/23 02:07:29 by stanaka2          #+#    #+#             */
-/*   Updated: 2026/04/26 20:07:42 by stanaka2         ###   ########.fr       */
+/*   Updated: 2026/06/01 21:01:29 by stanaka2         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
+
+#include <stdlib.h>
 
 #include "ft_printf/ft_printf.h"
 
