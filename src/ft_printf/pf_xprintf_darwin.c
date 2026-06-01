@@ -6,12 +6,13 @@
 /*   By: stanaka2 <stanaka2@student.42tokyo.jp>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/11/10 19:17:11 by stanaka2          #+#    #+#             */
-/*   Updated: 2026/06/01 21:37:09 by stanaka2         ###   ########.fr       */
+/*   Updated: 2026/06/01 22:06:04 by stanaka2         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "ft_printf/ft_printf.h"
 #include "ft_printf/pf_read_conversion.h"
+#include "ft_printf/pf_print_conversion.h"
 #include "ft_printf/pf_print_utils.h"
 
 static void	print_plaintext(const char **format, t_ctx *ctx);
