@@ -6,7 +6,7 @@
 /*   By: stanaka2 <stanaka2@student.42tokyo.jp>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/06/01 21:52:54 by stanaka2          #+#    #+#             */
-/*   Updated: 2026/06/01 21:59:13 by stanaka2         ###   ########.fr       */
+/*   Updated: 2026/06/01 22:50:47 by stanaka2         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,8 +20,8 @@ due to norminette=3.3.55 bug.
 */
 # include <unicode/utypes.h>
 
-#include <stdint.h>
-#include <stdbool.h>
+# include <stdint.h>
+# include <stdbool.h>
 
 # include "ft_printf/pf_types.h"
 
