@@ -6,11 +6,12 @@
 /*   By: stanaka2 <stanaka2@student.42tokyo.jp>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/04/26 17:42:06 by stanaka2          #+#    #+#             */
-/*   Updated: 2026/05/18 20:46:43 by stanaka2         ###   ########.fr       */
+/*   Updated: 2026/06/01 21:40:53 by stanaka2         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "ft_printf/ft_printf.h"
+#include "ft_printf/pf_print_utils.h"
 
 static void		print_conv_o(t_ctx *ctx, t_conv *conv, uintmax_t num);
 static size_t	get_digits_uintmax_octal(uintmax_t num);

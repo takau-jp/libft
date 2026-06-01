@@ -6,11 +6,12 @@
 /*   By: stanaka2 <stanaka2@student.42tokyo.jp>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/04/26 17:40:00 by stanaka2          #+#    #+#             */
-/*   Updated: 2026/05/01 19:01:11 by stanaka2         ###   ########.fr       */
+/*   Updated: 2026/06/01 21:40:50 by stanaka2         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "ft_printf/ft_printf.h"
+#include "ft_printf/pf_print_utils.h"
 
 static void		print_conv_d_i(t_ctx *ctx, t_conv *conv, intmax_t num);
 static size_t	get_digits_intmax(intmax_t num);

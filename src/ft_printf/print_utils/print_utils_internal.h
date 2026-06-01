@@ -1,21 +1,20 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   pf_print_space_width.c                             :+:      :+:    :+:   */
+/*   print_utils_internal.h                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: stanaka2 <stanaka2@student.42tokyo.jp>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2026/04/19 22:58:44 by stanaka2          #+#    #+#             */
-/*   Updated: 2026/06/01 21:35:38 by stanaka2         ###   ########.fr       */
+/*   Created: 2026/06/01 21:33:06 by stanaka2          #+#    #+#             */
+/*   Updated: 2026/06/01 21:34:35 by stanaka2         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "ft_printf/ft_printf.h"
-#include "./print_utils_internal.h"
+#ifndef PRINT_UTILS_INTERNAL_H
+# define PRINT_UTILS_INTERNAL_H
 
-void	pf_print_space_width(t_ctx *ctx, t_conv *conv, size_t len)
-{
-	if (conv->width <= 0 || (size_t)conv->width <= len)
-		return ;
-	pf_print_repeated_char(ctx, ' ', conv->width - len);
-}
+# include "ft_printf/pf_types.h"
+
+void	pf_print_repeated_char(t_ctx *ctx, char c, size_t count);
+
+#endif

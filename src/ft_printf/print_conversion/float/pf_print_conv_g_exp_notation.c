@@ -6,11 +6,12 @@
 /*   By: stanaka2 <stanaka2@student.42tokyo.jp>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/04/23 16:54:23 by stanaka2          #+#    #+#             */
-/*   Updated: 2026/05/01 19:15:48 by stanaka2         ###   ########.fr       */
+/*   Updated: 2026/06/01 21:40:00 by stanaka2         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "ft_printf/ft_printf.h"
+#include "ft_printf/pf_print_utils.h"
 
 static int		get_printable_precision_exp_notation(t_conv *conv,
 					t_pf_float *fp, int decimal_exp);
