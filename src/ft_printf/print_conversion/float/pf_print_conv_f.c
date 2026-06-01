@@ -6,12 +6,13 @@
 /*   By: stanaka2 <stanaka2@student.42tokyo.jp>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/04/21 22:09:41 by stanaka2          #+#    #+#             */
-/*   Updated: 2026/06/01 21:39:56 by stanaka2         ###   ########.fr       */
+/*   Updated: 2026/06/01 22:01:06 by stanaka2         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "ft_printf/ft_printf.h"
 #include "ft_printf/pf_print_utils.h"
+#include "./float_internal.h"
 
 static size_t	get_length_fixed_point(t_conv *conv, t_pf_float *fp);
 static void		print_fixed_point(t_ctx *ctx, t_conv *conv, t_pf_float *fp);

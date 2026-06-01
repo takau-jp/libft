@@ -6,13 +6,14 @@
 /*   By: stanaka2 <stanaka2@student.42tokyo.jp>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/04/21 10:52:51 by stanaka2          #+#    #+#             */
-/*   Updated: 2026/06/01 21:01:39 by stanaka2         ###   ########.fr       */
+/*   Updated: 2026/06/01 22:03:06 by stanaka2         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <stdlib.h>
 
 #include "ft_printf/ft_printf.h"
+#include "../float_internal.h"
 
 static void	set_binary64_metadata(t_pf_float *fp, uint8_t base);
 static void	set_binary80_metadata(t_pf_float *fp);
