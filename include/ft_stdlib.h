@@ -6,7 +6,7 @@
 /*   By: stanaka2 <stanaka2@student.42tokyo.jp>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/04/19 15:32:39 by stanaka2          #+#    #+#             */
-/*   Updated: 2026/05/17 12:33:18 by stanaka2         ###   ########.fr       */
+/*   Updated: 2026/06/01 20:46:56 by stanaka2         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,6 @@
 # define FT_STDLIB_H
 
 # include <stddef.h>
-# include <stdlib.h>
 
 unsigned int	ft_abs_uint(int n);
 unsigned long	ft_abs_ulong(long n);
