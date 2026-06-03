@@ -6,7 +6,7 @@
 /*   By: stanaka2 <stanaka2@student.42tokyo.jp>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/04/26 17:48:18 by stanaka2          #+#    #+#             */
-/*   Updated: 2026/06/01 22:21:34 by stanaka2         ###   ########.fr       */
+/*   Updated: 2026/06/03 20:03:46 by stanaka2         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,7 +42,7 @@ void	pf_print_conversion(va_list *ap, t_ctx *ctx, t_conv *conv)
 static void	print_character_conversion(
 	va_list *ap, t_ctx *ctx, t_conv *conv)
 {
-	if (!ft_strcmp(conv->length, "l"))
+	if (conv->length == PF_LENGTH_LOWER_L)
 	{
 		if (conv->identifier == 'c')
 			pf_conv_lc(ap, ctx, conv);
@@ -76,7 +76,7 @@ static void	print_float_conversion(va_list *ap, t_ctx *ctx, t_conv *conv)
 {
 	if (conv->identifier == 'a' || conv->identifier == 'A')
 		pf_conv_a_binary64(ap, ctx, conv);
-	else if (!ft_strcmp(conv->length, "L"))
+	else if (conv->length == PF_LENGTH_UPPER_L)
 	{
 		if (conv->identifier == 'f' || conv->identifier == 'F')
 			pf_conv_f_binary80(ap, ctx, conv);

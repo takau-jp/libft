@@ -6,7 +6,7 @@
 /*   By: stanaka2 <stanaka2@student.42tokyo.jp>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/04/26 17:27:23 by stanaka2          #+#    #+#             */
-/*   Updated: 2026/06/01 22:49:22 by stanaka2         ###   ########.fr       */
+/*   Updated: 2026/06/03 20:09:56 by stanaka2         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -126,22 +126,28 @@ static bool	read_precision(va_list *ap, const char **format, t_conv *conv)
 
 static void	read_length(const char **format, t_conv *conv)
 {
-	if (**format == 'h' || **format == 'l')
+	if (ft_strchr(PF_LENGTH, **format) != NULL)
 	{
-		conv->length[0] = **format;
-		conv->length[1] = '\0';
-		(*format)++;
-		if (**format == conv->length[0])
-		{
-			conv->length[1] = **format;
-			conv->length[2] = '\0';
-			(*format)++;
-		}
+		if (ft_strncmp(*format, "hh", 2) == 0)
+			conv->length = PF_LENGTH_HH;
+		else if (**format == 'h')
+			conv->length = PF_LENGTH_H;
+		else if (ft_strncmp(*format, "ll", 2) == 0)
+			conv->length = PF_LENGTH_LOWER_LL;
+		else if (**format == 'l')
+			conv->length = PF_LENGTH_LOWER_L;
+		else if (**format == 'L')
+			conv->length = PF_LENGTH_UPPER_L;
+		else if (**format == 'j')
+			conv->length = PF_LENGTH_J;
+		else if (**format == 'z')
+			conv->length = PF_LENGTH_Z;
+		else if (**format == 't')
+			conv->length = PF_LENGTH_T;
+		++(*format);
+		if (conv->length == PF_LENGTH_HH || conv->length == PF_LENGTH_LOWER_LL)
+			++(*format);
 	}
-	else if (ft_strchr(PF_LENGTH, **format))
-	{
-		conv->length[0] = **format;
-		conv->length[1] = '\0';
-		(*format)++;
-	}
+	else
+		conv->length = PF_NO_LENGTH;
 }
