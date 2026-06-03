@@ -6,13 +6,13 @@
 /*   By: stanaka2 <stanaka2@student.42tokyo.jp>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/03 13:46:30 by stanaka2          #+#    #+#             */
-/*   Updated: 2026/06/01 22:54:05 by stanaka2         ###   ########.fr       */
+/*   Updated: 2026/06/03 19:29:28 by stanaka2         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <stdint.h>
 
-void	pf_array_add(int8_t *augend, int8_t *addend, int array_size)
+void	pf_array_add(uint8_t *augend, uint8_t *addend, int array_size)
 {
 	int	i;
 
@@ -30,7 +30,7 @@ void	pf_array_add(int8_t *augend, int8_t *addend, int array_size)
 	}
 }
 
-void	pf_array_half(int8_t *dividend, int array_size)
+void	pf_array_half(uint8_t *dividend, int array_size)
 {
 	int	i;
 
@@ -44,10 +44,10 @@ void	pf_array_half(int8_t *dividend, int array_size)
 	dividend[i] /= 2;
 }
 
-void	pf_array_double(int8_t *multiplicand, int array_size)
+void	pf_array_double(uint8_t *multiplicand, int array_size)
 {
 	int		i;
-	int8_t	carry;
+	uint8_t	carry;
 
 	i = array_size - 1;
 	carry = 0;
@@ -60,10 +60,10 @@ void	pf_array_double(int8_t *multiplicand, int array_size)
 	}
 }
 
-void	pf_array_double_hex(int8_t *multiplicand, int array_size)
+void	pf_array_double_hex(uint8_t *multiplicand, int array_size)
 {
 	int		i;
-	int8_t	carry;
+	uint8_t	carry;
 
 	i = array_size - 1;
 	carry = 0;

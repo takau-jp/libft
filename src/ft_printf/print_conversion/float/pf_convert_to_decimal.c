@@ -6,7 +6,7 @@
 /*   By: stanaka2 <stanaka2@student.42tokyo.jp>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/04/23 02:07:29 by stanaka2          #+#    #+#             */
-/*   Updated: 2026/06/01 22:17:04 by stanaka2         ###   ########.fr       */
+/*   Updated: 2026/06/03 19:30:16 by stanaka2         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,7 +32,7 @@ bool	pf_convert_to_decimal(t_pf_float *fp)
 	(i.e., 2⁰, 2¹, 2², ...), beginning with 2⁰ = 1.*/
 static bool	convert_to_decimal_int(t_pf_float *fp)
 {
-	int8_t	*scaling_factor;
+	uint8_t	*scaling_factor;
 	int		n;
 
 	if (fp->exponent < 0)
@@ -62,7 +62,7 @@ static bool	convert_to_decimal_int(t_pf_float *fp)
 	(i.e., 2^-1, 2^-2, 2^-3, ...), beginning with 2^-1 = 0.5.*/
 static bool	convert_to_decimal_frac(t_pf_float *fp)
 {
-	int8_t	*scaling_factor;
+	uint8_t	*scaling_factor;
 	int		n;
 
 	if (fp->fraction_size < fp->exponent - fp->emax)

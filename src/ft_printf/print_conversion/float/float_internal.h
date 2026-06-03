@@ -6,7 +6,7 @@
 /*   By: stanaka2 <stanaka2@student.42tokyo.jp>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/06/01 21:52:54 by stanaka2          #+#    #+#             */
-/*   Updated: 2026/06/01 22:50:47 by stanaka2         ###   ########.fr       */
+/*   Updated: 2026/06/03 19:29:59 by stanaka2         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -106,8 +106,8 @@ typedef struct s_floating_point
 	uint64_t					int_binary;
 	uint64_t					frac_binary;
 	// print
-	int8_t						*print_buf;
-	int8_t						*radix_point;
+	uint8_t						*print_buf;
+	uint8_t						*radix_point;
 	// metadata
 	uint8_t						base;
 	uint8_t						type_bit_size;
@@ -135,10 +135,10 @@ void	pf_print_conv_g_fixed_point(
 			t_ctx *ctx, t_conv *conv, t_pf_float *fp, int decimal_exp);
 void	pf_round_to_nearest_even(t_pf_float *fp, int precision);
 // utils
-void	pf_array_add(int8_t *augend, int8_t *addend, int array_size);
-void	pf_array_half(int8_t *dividend, int array_size);
-void	pf_array_double(int8_t *multiplicand, int array_size);
-void	pf_array_double_hex(int8_t *multiplicand, int array_size);
+void	pf_array_add(uint8_t *augend, uint8_t *addend, int array_size);
+void	pf_array_half(uint8_t *dividend, int array_size);
+void	pf_array_double(uint8_t *multiplicand, int array_size);
+void	pf_array_double_hex(uint8_t *multiplicand, int array_size);
 int		pf_get_decimal_exponent(t_pf_float *fp);
 void	pf_print_decimal_exponent(t_ctx *ctx, t_conv *conv, int decimal_exp);
 void	pf_print_binary_exponent(t_ctx *ctx, t_conv *conv, int binary_exp);
