@@ -6,7 +6,7 @@
 /*   By: stanaka2 <stanaka2@student.42tokyo.jp>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/11/10 19:49:57 by stanaka2          #+#    #+#             */
-/*   Updated: 2026/06/01 22:15:52 by stanaka2         ###   ########.fr       */
+/*   Updated: 2026/06/03 21:03:28 by stanaka2         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,6 @@
 
 #include "ft_string.h"
 #include "ft_printf/ft_printf.h"
-#include "ft_printf/pf_defines.h"
 
 int	ft_sprintf(char *str, const char *format, ...)
 {

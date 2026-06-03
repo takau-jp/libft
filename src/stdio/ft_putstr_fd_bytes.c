@@ -6,13 +6,13 @@
 /*   By: stanaka2 <stanaka2@student.42tokyo.jp>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/08/20 19:45:51 by stanaka2          #+#    #+#             */
-/*   Updated: 2026/06/01 20:45:29 by stanaka2         ###   ########.fr       */
+/*   Updated: 2026/06/03 21:08:18 by stanaka2         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "ft_stdio.h"
 #include "ft_string.h"
-#include "libft/libft_defines.h"
+#include "./ft_stdio_internal.h"
 
 ssize_t	ft_putstr_fd_bytes(char *s, int fd)
 {

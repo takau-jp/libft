@@ -6,13 +6,13 @@
 /*   By: stanaka2 <stanaka2@student.42tokyo.jp>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/25 13:08:41 by stanaka2          #+#    #+#             */
-/*   Updated: 2026/06/01 20:45:47 by stanaka2         ###   ########.fr       */
+/*   Updated: 2026/06/03 21:08:18 by stanaka2         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "ft_stdio.h"
 #include "ft_string.h"
-#include "libft/libft_defines.h"
+#include "./ft_stdio_internal.h"
 
 void	ft_putstr_fd(char *s, int fd)
 {

@@ -6,7 +6,7 @@
 /*   By: stanaka2 <stanaka2@student.42tokyo.jp>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/22 02:16:43 by stanaka2          #+#    #+#             */
-/*   Updated: 2026/06/03 20:19:38 by stanaka2         ###   ########.fr       */
+/*   Updated: 2026/06/03 21:01:35 by stanaka2         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,8 +16,17 @@
 # include <stddef.h>
 # include <stdbool.h>
 # include <stdarg.h>
+# include <limits.h>
 
 # include "ft_printf/pf_types.h"
+
+# ifdef __APPLE__
+#  define PRINTF_RESULT_LIMIT 2147483646
+# else
+#  define PRINTF_RESULT_LIMIT INT_MAX
+# endif
+
+# define PF_ERROR -1
 
 enum e_dst_type
 {
