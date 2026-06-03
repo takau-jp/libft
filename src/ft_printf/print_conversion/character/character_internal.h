@@ -6,7 +6,7 @@
 /*   By: stanaka2 <stanaka2@student.42tokyo.jp>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/06/01 21:44:12 by stanaka2          #+#    #+#             */
-/*   Updated: 2026/06/03 20:47:23 by stanaka2         ###   ########.fr       */
+/*   Updated: 2026/06/03 20:54:35 by stanaka2         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,6 +30,5 @@ void	pf_print_null(t_ctx *ctx, t_conv *conv);
 bool	pf_validate_codepoint(wchar_t wc);
 size_t	pf_calc_utf8_len(wchar_t wc);
 void	pf_encode_utf8(wchar_t wc, unsigned char *utf8);
-void	pf_print_utf8(t_ctx *ctx, const unsigned char *utf8_str, size_t len);
 
 #endif
