@@ -6,7 +6,7 @@
 /*   By: stanaka2 <stanaka2@student.42tokyo.jp>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/04/21 22:09:41 by stanaka2          #+#    #+#             */
-/*   Updated: 2026/06/01 22:19:02 by stanaka2         ###   ########.fr       */
+/*   Updated: 2026/06/03 20:46:09 by stanaka2         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,11 +46,11 @@ static size_t	get_length_fixed_point(t_conv *conv, t_pf_float *fp)
 	else
 	{
 		i = 0;
-		while (i < fp->print_int_size)
+		while (i < fp->buf_int_size)
 		{
 			if (fp->print_buf[i] != 0)
 			{
-				len += fp->print_int_size - i;
+				len += fp->buf_int_size - i;
 				break ;
 			}
 			i++;
@@ -67,13 +67,13 @@ static void	print_fixed_point(t_ctx *ctx, t_conv *conv, t_pf_float *fp)
 	int	i;
 
 	i = 0;
-	while (i < fp->print_int_size - 1 && fp->print_buf[i] == 0)
+	while (i < fp->buf_int_size - 1 && fp->print_buf[i] == 0)
 		i++;
-	while (i < fp->print_int_size)
+	while (i < fp->buf_int_size)
 		pf_print_char(ctx, fp->print_buf[i++] + '0');
 	if (conv->precision > 0 || conv->hash_flag == '#')
 		pf_print_char(ctx, '.');
-	while (conv->precision > 0 && i < fp->print_buf_size)
+	while (conv->precision > 0 && i < fp->buf_size)
 	{
 		pf_print_char(ctx, fp->print_buf[i++] + '0');
 		conv->precision--;

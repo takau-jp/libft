@@ -6,7 +6,7 @@
 /*   By: stanaka2 <stanaka2@student.42tokyo.jp>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/04/23 16:40:55 by stanaka2          #+#    #+#             */
-/*   Updated: 2026/06/01 22:18:14 by stanaka2         ###   ########.fr       */
+/*   Updated: 2026/06/03 20:45:15 by stanaka2         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,7 +44,7 @@ static int	get_printable_precision_hex(t_pf_float *fp)
 
 	i = 0;
 	printable_prec = 0;
-	while (i < fp->print_frac_size)
+	while (i < fp->buf_frac_size)
 	{
 		if (fp->radix_point[i++] != 0)
 			printable_prec = i;
@@ -86,7 +86,7 @@ static void	print_float_hex(t_ctx *ctx, t_conv *conv, t_pf_float *fp)
 	if (conv->precision > 0 || conv->hash_flag == '#')
 		pf_print_char(ctx, '.');
 	i = 0;
-	while (conv->precision > 0 && i < fp->print_frac_size)
+	while (conv->precision > 0 && i < fp->buf_frac_size)
 	{
 		if (conv->identifier == 'a')
 			pf_print_char(ctx, "0123456789abcdef"[fp->radix_point[i++]]);

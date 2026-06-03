@@ -6,7 +6,7 @@
 /*   By: stanaka2 <stanaka2@student.42tokyo.jp>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/04/26 17:45:43 by stanaka2          #+#    #+#             */
-/*   Updated: 2026/06/01 21:48:41 by stanaka2         ###   ########.fr       */
+/*   Updated: 2026/06/03 20:26:51 by stanaka2         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,7 +18,7 @@ void	pf_conv_lc(va_list *ap, t_ctx *ctx, t_conv *conv)
 {
 	wint_t			wi;
 	wint_t			wc;
-	unsigned char	utf8[PF_UTF8_SIZE];
+	unsigned char	utf8[UTF8_SIZE];
 	size_t			len;
 
 	wi = va_arg(*ap, wint_t);

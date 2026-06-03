@@ -6,7 +6,7 @@
 /*   By: stanaka2 <stanaka2@student.42tokyo.jp>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/04/21 20:30:38 by stanaka2          #+#    #+#             */
-/*   Updated: 2026/06/01 22:00:15 by stanaka2         ###   ########.fr       */
+/*   Updated: 2026/06/03 20:38:46 by stanaka2         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,7 +21,7 @@ void	pf_conv_a_binary64(va_list *ap, t_ctx *ctx, t_conv *conv)
 	t_pf_float	fp;
 
 	if (conv->has_prec == false)
-		conv->precision = PF_BINARY64_FRAC_HEX;
+		conv->precision = BINARY64_HEX_FRAC_DIGITS;
 	num = va_arg(*ap, double);
 	if (!pf_float_init(&fp, BINARY64_SIZE, 16))
 	{
@@ -35,12 +35,12 @@ void	pf_conv_a_binary64(va_list *ap, t_ctx *ctx, t_conv *conv)
 
 static void	process_conv_a(t_ctx *ctx, t_conv *conv, t_pf_float *fp)
 {
-	if (fp->value_type == PF_INF)
+	if (fp->value_type == FLOAT_INF)
 	{
 		pf_print_inf(ctx, conv, fp);
 		return ;
 	}
-	if (fp->value_type == PF_NAN)
+	if (fp->value_type == FLOAT_NAN)
 	{
 		pf_print_nan(ctx, conv, fp);
 		return ;

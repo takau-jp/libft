@@ -6,7 +6,7 @@
 /*   By: stanaka2 <stanaka2@student.42tokyo.jp>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/06/01 21:44:12 by stanaka2          #+#    #+#             */
-/*   Updated: 2026/06/01 21:49:46 by stanaka2         ###   ########.fr       */
+/*   Updated: 2026/06/03 20:47:23 by stanaka2         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,11 +19,11 @@
 # include "ft_printf/pf_types.h"
 
 # ifdef __APPLE__
-#  define PF_REC2279 6
-#  define PF_UTF8_SIZE PF_REC2279
+// REC2279
+#  define UTF8_SIZE 6
 # else
-#  define PF_REC3629 4
-#  define PF_UTF8_SIZE PF_REC3629
+// REC3629
+#  define UTF8_SIZE 4
 # endif
 
 void	pf_print_null(t_ctx *ctx, t_conv *conv);

@@ -6,7 +6,7 @@
 /*   By: stanaka2 <stanaka2@student.42tokyo.jp>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/04/26 17:40:00 by stanaka2          #+#    #+#             */
-/*   Updated: 2026/06/03 20:04:28 by stanaka2         ###   ########.fr       */
+/*   Updated: 2026/06/03 20:19:38 by stanaka2         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,19 +27,19 @@ void	pf_conv_d_i(va_list *ap, t_ctx *ctx, t_conv *conv)
 
 	if (!conv->has_prec)
 		conv->precision = 1;
-	if (conv->length == PF_LENGTH_HH)
+	if (conv->length == LENGTH_HH)
 		num = (intmax_t)(signed char)va_arg(*ap, int);
-	else if (conv->length == PF_LENGTH_H)
+	else if (conv->length == LENGTH_H)
 		num = (intmax_t)(short int)va_arg(*ap, int);
-	else if (conv->length == PF_LENGTH_LOWER_L)
+	else if (conv->length == LENGTH_LOWER_L)
 		num = (intmax_t)va_arg(*ap, long int);
-	else if (conv->length == PF_LENGTH_LOWER_LL)
+	else if (conv->length == LENGTH_LOWER_LL)
 		num = (intmax_t)va_arg(*ap, long long int);
-	else if (conv->length == PF_LENGTH_J)
+	else if (conv->length == LENGTH_J)
 		num = (intmax_t)va_arg(*ap, intmax_t);
-	else if (conv->length == PF_LENGTH_Z)
+	else if (conv->length == LENGTH_Z)
 		num = (intmax_t)va_arg(*ap, ssize_t);
-	else if (conv->length == PF_LENGTH_T)
+	else if (conv->length == LENGTH_T)
 		num = (intmax_t)va_arg(*ap, ptrdiff_t);
 	else
 		num = (intmax_t)va_arg(*ap, int);

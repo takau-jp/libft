@@ -6,7 +6,7 @@
 /*   By: stanaka2 <stanaka2@student.42tokyo.jp>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/20 13:42:37 by stanaka2          #+#    #+#             */
-/*   Updated: 2026/06/03 20:10:03 by stanaka2         ###   ########.fr       */
+/*   Updated: 2026/06/03 20:31:44 by stanaka2         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,8 +27,8 @@ bool	pf_read_conversion(
 	va_list *ap, const char **format, t_ctx *ctx, t_conv *conv)
 {
 	(*format)++;
-	while (ft_strchr(PF_FLAGS, **format) || ft_isdigit(**format)
-		|| **format == '*' || **format == '.' || ft_strchr(PF_LENGTH, **format))
+	while (ft_strchr(FLAGS, **format) || ft_isdigit(**format)
+		|| **format == '*' || **format == '.' || ft_strchr(LENGTH, **format))
 	{
 		read_flags(format, conv);
 		if (!read_width(ap, format, ctx, conv))
@@ -43,7 +43,7 @@ bool	pf_read_conversion(
 		}
 		read_length(format, conv);
 	}
-	if (!ft_strchr(PF_CONV, **format))
+	if (!ft_strchr(CONV, **format))
 		return (false);
 	conv->identifier = **format;
 	(*format)++;
@@ -52,7 +52,7 @@ bool	pf_read_conversion(
 
 static void	read_flags(const char **format, t_conv *conv)
 {
-	while (ft_strchr(PF_FLAGS, **format))
+	while (ft_strchr(FLAGS, **format))
 	{
 		if (**format == '#')
 			conv->hash_flag = '#';
@@ -128,28 +128,28 @@ static bool	read_precision(va_list *ap, const char **format, t_conv *conv)
 
 static void	read_length(const char **format, t_conv *conv)
 {
-	if (ft_strchr(PF_LENGTH, **format) != NULL)
+	if (ft_strchr(LENGTH, **format) != NULL)
 	{
 		if (ft_strncmp(*format, "hh", 2) == 0)
-			conv->length = PF_LENGTH_HH;
+			conv->length = LENGTH_HH;
 		else if (**format == 'h')
-			conv->length = PF_LENGTH_H;
+			conv->length = LENGTH_H;
 		else if (ft_strncmp(*format, "ll", 2) == 0)
-			conv->length = PF_LENGTH_LOWER_LL;
+			conv->length = LENGTH_LOWER_LL;
 		else if (**format == 'l')
-			conv->length = PF_LENGTH_LOWER_L;
+			conv->length = LENGTH_LOWER_L;
 		else if (**format == 'L')
-			conv->length = PF_LENGTH_UPPER_L;
+			conv->length = LENGTH_UPPER_L;
 		else if (**format == 'j')
-			conv->length = PF_LENGTH_J;
+			conv->length = LENGTH_J;
 		else if (**format == 'z')
-			conv->length = PF_LENGTH_Z;
+			conv->length = LENGTH_Z;
 		else if (**format == 't')
-			conv->length = PF_LENGTH_T;
+			conv->length = LENGTH_T;
 		++(*format);
-		if (conv->length == PF_LENGTH_HH || conv->length == PF_LENGTH_LOWER_LL)
+		if (conv->length == LENGTH_HH || conv->length == LENGTH_LOWER_LL)
 			++(*format);
 	}
 	else
-		conv->length = PF_NO_LENGTH;
+		conv->length = NO_LENGTH;
 }

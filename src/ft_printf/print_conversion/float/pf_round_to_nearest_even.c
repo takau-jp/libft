@@ -6,7 +6,7 @@
 /*   By: stanaka2 <stanaka2@student.42tokyo.jp>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/04/23 17:45:47 by stanaka2          #+#    #+#             */
-/*   Updated: 2026/06/01 22:01:17 by stanaka2         ###   ########.fr       */
+/*   Updated: 2026/06/03 20:45:25 by stanaka2         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,16 +31,16 @@ void	pf_round_to_nearest_even(t_pf_float *fp, int precision)
 {
 	int	i;
 
-	if (precision <= -(fp->print_int_size) || fp->print_frac_size <= precision)
+	if (precision <= -(fp->buf_int_size) || fp->buf_frac_size <= precision)
 		return ;
 	if (fp->radix_point[precision] > fp->base / 2)
 		move_up(fp, precision - 1);
 	else if (fp->radix_point[precision] == fp->base / 2)
 	{
 		i = precision + 1;
-		while (i < fp->print_frac_size && fp->radix_point[i] == 0)
+		while (i < fp->buf_frac_size && fp->radix_point[i] == 0)
 			i++;
-		if (i < fp->print_frac_size)
+		if (i < fp->buf_frac_size)
 			move_up(fp, precision - 1);
 		else if ((fp->radix_point[precision - 1] % 2) == 1)
 			move_up(fp, precision - 1);
@@ -55,7 +55,7 @@ allowing carry to cross the decimal point without branching.
 static void	move_up(t_pf_float *fp, int digit)
 {
 	fp->radix_point[digit] += 1;
-	while (digit >= -(fp->print_int_size))
+	while (digit >= -(fp->buf_int_size))
 	{
 		if (fp->radix_point[digit] < fp->base)
 			return ;

@@ -6,7 +6,7 @@
 /*   By: stanaka2 <stanaka2@student.42tokyo.jp>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/06/01 21:16:10 by stanaka2          #+#    #+#             */
-/*   Updated: 2026/06/03 20:05:27 by stanaka2         ###   ########.fr       */
+/*   Updated: 2026/06/03 20:22:19 by stanaka2         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,8 +42,5 @@
 # endif
 
 # define PF_ERROR -1
-# define PF_CONV "cspdiuxX%onfFeEgGaA"
-# define PF_FLAGS "-+ #0"
-# define PF_LENGTH "hljztL"
 
 #endif

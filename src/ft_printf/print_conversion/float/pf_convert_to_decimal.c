@@ -6,7 +6,7 @@
 /*   By: stanaka2 <stanaka2@student.42tokyo.jp>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/04/23 02:07:29 by stanaka2          #+#    #+#             */
-/*   Updated: 2026/06/03 19:30:16 by stanaka2         ###   ########.fr       */
+/*   Updated: 2026/06/03 20:45:25 by stanaka2         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,21 +37,21 @@ static bool	convert_to_decimal_int(t_pf_float *fp)
 
 	if (fp->exponent < 0)
 		return (true);
-	scaling_factor = ft_calloc(fp->print_int_size, sizeof(uint8_t));
+	scaling_factor = ft_calloc(fp->buf_int_size, sizeof(uint8_t));
 	if (scaling_factor == NULL)
 		return (false);
-	scaling_factor[fp->print_int_size - 1] = 1;
+	scaling_factor[fp->buf_int_size - 1] = 1;
 	n = 0;
 	while (n < fp->fraction_size + 1)
 	{
 		if (fp->int_binary & ((uint64_t)1 << n))
-			pf_array_add(fp->print_buf, scaling_factor, fp->print_int_size);
-		pf_array_double(scaling_factor, fp->print_int_size);
+			pf_array_add(fp->print_buf, scaling_factor, fp->buf_int_size);
+		pf_array_double(scaling_factor, fp->buf_int_size);
 		n++;
 	}
 	while (n <= fp->exponent)
 	{
-		pf_array_double(fp->print_buf, fp->print_int_size);
+		pf_array_double(fp->print_buf, fp->buf_int_size);
 		n++;
 	}
 	free(scaling_factor);
@@ -67,19 +67,19 @@ static bool	convert_to_decimal_frac(t_pf_float *fp)
 
 	if (fp->fraction_size < fp->exponent - fp->emax)
 		return (true);
-	scaling_factor = ft_calloc(fp->print_frac_size, sizeof(uint8_t));
+	scaling_factor = ft_calloc(fp->buf_frac_size, sizeof(uint8_t));
 	if (scaling_factor == NULL)
 		return (false);
 	scaling_factor[0] = 5;
 	n = fp->exponent;
 	while (n++ < -1)
-		pf_array_half(scaling_factor, fp->print_frac_size);
+		pf_array_half(scaling_factor, fp->buf_frac_size);
 	n = 0;
 	while (n <= fp->fraction_size)
 	{
 		if (fp->frac_binary & ((uint64_t)1 << (63 - n)))
-			pf_array_add(fp->radix_point, scaling_factor, fp->print_frac_size);
-		pf_array_half(scaling_factor, fp->print_frac_size);
+			pf_array_add(fp->radix_point, scaling_factor, fp->buf_frac_size);
+		pf_array_half(scaling_factor, fp->buf_frac_size);
 		n++;
 	}
 	free(scaling_factor);

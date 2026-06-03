@@ -6,7 +6,7 @@
 /*   By: stanaka2 <stanaka2@student.42tokyo.jp>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/04/22 23:52:20 by stanaka2          #+#    #+#             */
-/*   Updated: 2026/06/01 22:17:50 by stanaka2         ###   ########.fr       */
+/*   Updated: 2026/06/03 20:46:09 by stanaka2         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -69,15 +69,15 @@ static void	print_exp_notation(
 
 	i = 0;
 	if (fp->int_binary == 0)
-		i = fp->print_int_size;
+		i = fp->buf_int_size;
 	if (fp->significand == 0)
-		i = fp->print_buf_size - 1;
-	while (i < fp->print_buf_size - 1 && fp->print_buf[i] == 0)
+		i = fp->buf_size - 1;
+	while (i < fp->buf_size - 1 && fp->print_buf[i] == 0)
 		i++;
 	pf_print_char(ctx, fp->print_buf[i++] + '0');
 	if (conv->precision > 0 || conv->hash_flag == '#')
 		pf_print_char(ctx, '.');
-	while (conv->precision > 0 && i < fp->print_buf_size)
+	while (conv->precision > 0 && i < fp->buf_size)
 	{
 		pf_print_char(ctx, fp->print_buf[i++] + '0');
 		conv->precision--;

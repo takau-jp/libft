@@ -6,7 +6,7 @@
 /*   By: stanaka2 <stanaka2@student.42tokyo.jp>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/04/23 16:54:23 by stanaka2          #+#    #+#             */
-/*   Updated: 2026/06/01 22:21:50 by stanaka2         ###   ########.fr       */
+/*   Updated: 2026/06/03 20:46:09 by stanaka2         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -53,7 +53,7 @@ static int	get_printable_precision_exp_notation(
 	printable_prec = 0;
 	precision = 0;
 	i = -1 - decimal_exp;
-	while (precision < conv->precision && i < fp->print_frac_size)
+	while (precision < conv->precision && i < fp->buf_frac_size)
 	{
 		precision++;
 		if (fp->radix_point[i] != 0)
@@ -92,12 +92,12 @@ static void	print_exp_notation(
 {
 	int	i;
 
-	i = fp->print_int_size - 1 - decimal_exp;
+	i = fp->buf_int_size - 1 - decimal_exp;
 	pf_print_char(ctx, fp->print_buf[i++] + '0');
 	conv->precision--;
 	if (conv->precision > 0 || conv->hash_flag == '#')
 		pf_print_char(ctx, '.');
-	while (conv->precision > 0 && i < fp->print_buf_size)
+	while (conv->precision > 0 && i < fp->buf_size)
 	{
 		pf_print_char(ctx, fp->print_buf[i++] + '0');
 		conv->precision--;

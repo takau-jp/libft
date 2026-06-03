@@ -6,7 +6,7 @@
 /*   By: stanaka2 <stanaka2@student.42tokyo.jp>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/04/23 02:31:27 by stanaka2          #+#    #+#             */
-/*   Updated: 2026/06/01 22:18:50 by stanaka2         ###   ########.fr       */
+/*   Updated: 2026/06/03 20:28:43 by stanaka2         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,11 +31,11 @@ void	pf_decode_binary80(long double num, t_pf_float *fp)
 	fp->fraction = right_mem & (((uint64_t)1 << fp->fraction_size) - 1);
 	fp->significand = right_mem;
 	set_float_value_type(fp);
-	if (fp->value_type == PF_INF || fp->value_type == PF_NAN)
+	if (fp->value_type == FLOAT_INF || fp->value_type == FLOAT_NAN)
 		return ;
-	if (fp->value_type == PF_SUBNORMAL)
+	if (fp->value_type == FLOAT_SUBNORMAL)
 		fp->emax -= 1;
-	if (fp->value_type != PF_ZERO)
+	if (fp->value_type != FLOAT_ZERO)
 		fp->exponent -= fp->emax;
 	get_int_binary(fp);
 	get_frac_binary(fp);
@@ -47,19 +47,19 @@ static void	set_float_value_type(t_pf_float *fp)
 	if (fp->exponent == fp->nan_inf_exponent)
 	{
 		if (fp->fraction == 0)
-			fp->value_type = PF_INF;
+			fp->value_type = FLOAT_INF;
 		else
-			fp->value_type = PF_NAN;
+			fp->value_type = FLOAT_NAN;
 	}
 	else if (fp->exponent == 0)
 	{
 		if (fp->significand == 0)
-			fp->value_type = PF_ZERO;
+			fp->value_type = FLOAT_ZERO;
 		else
-			fp->value_type = PF_SUBNORMAL;
+			fp->value_type = FLOAT_SUBNORMAL;
 	}
 	else
-		fp->value_type = PF_NORMAL;
+		fp->value_type = FLOAT_NORMAL;
 }
 
 static void	get_int_binary(t_pf_float *fp)

@@ -6,7 +6,7 @@
 /*   By: stanaka2 <stanaka2@student.42tokyo.jp>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/22 02:16:43 by stanaka2          #+#    #+#             */
-/*   Updated: 2026/06/03 19:55:46 by stanaka2         ###   ########.fr       */
+/*   Updated: 2026/06/03 20:19:38 by stanaka2         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,15 +42,15 @@ struct s_ctx
 
 enum e_length
 {
-	PF_NO_LENGTH,
-	PF_LENGTH_HH,
-	PF_LENGTH_H,
-	PF_LENGTH_LOWER_LL,
-	PF_LENGTH_LOWER_L,
-	PF_LENGTH_UPPER_L,
-	PF_LENGTH_J,
-	PF_LENGTH_Z,
-	PF_LENGTH_T,
+	NO_LENGTH,
+	LENGTH_HH,
+	LENGTH_H,
+	LENGTH_LOWER_LL,
+	LENGTH_LOWER_L,
+	LENGTH_UPPER_L,
+	LENGTH_J,
+	LENGTH_Z,
+	LENGTH_T,
 };
 
 struct s_conversion

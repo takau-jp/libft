@@ -6,7 +6,7 @@
 /*   By: stanaka2 <stanaka2@student.42tokyo.jp>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/04/21 20:59:16 by stanaka2          #+#    #+#             */
-/*   Updated: 2026/06/01 22:00:21 by stanaka2         ###   ########.fr       */
+/*   Updated: 2026/06/03 20:28:43 by stanaka2         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -53,12 +53,12 @@ void	pf_conv_f_binary80(va_list *ap, t_ctx *ctx, t_conv *conv)
 
 static void	process_conv_f(t_ctx *ctx, t_conv *conv, t_pf_float *fp)
 {
-	if (fp->value_type == PF_INF)
+	if (fp->value_type == FLOAT_INF)
 	{
 		pf_print_inf(ctx, conv, fp);
 		return ;
 	}
-	if (fp->value_type == PF_NAN)
+	if (fp->value_type == FLOAT_NAN)
 	{
 		pf_print_nan(ctx, conv, fp);
 		return ;

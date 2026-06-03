@@ -6,7 +6,7 @@
 /*   By: stanaka2 <stanaka2@student.42tokyo.jp>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/04/23 00:31:23 by stanaka2          #+#    #+#             */
-/*   Updated: 2026/06/01 22:00:24 by stanaka2         ###   ########.fr       */
+/*   Updated: 2026/06/03 20:45:25 by stanaka2         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -60,12 +60,12 @@ static void	process_conv_g(t_ctx *ctx, t_conv *conv, t_pf_float *fp)
 {
 	int	decimal_exp;
 
-	if (fp->value_type == PF_INF)
+	if (fp->value_type == FLOAT_INF)
 	{
 		pf_print_inf(ctx, conv, fp);
 		return ;
 	}
-	if (fp->value_type == PF_NAN)
+	if (fp->value_type == FLOAT_NAN)
 	{
 		pf_print_nan(ctx, conv, fp);
 		return ;
@@ -88,14 +88,14 @@ static int	normalize_rounding_precision(t_pf_float *fp, int precision)
 {
 	int	i;
 
-	if (fp->value_type == PF_ZERO)
+	if (fp->value_type == FLOAT_ZERO)
 		return (precision - 1);
 	i = 0;
 	if (fp->int_binary != 0)
 	{
-		while (i < fp->print_int_size && fp->print_buf[i] == 0)
+		while (i < fp->buf_int_size && fp->print_buf[i] == 0)
 			i++;
-		precision -= (fp->print_int_size - i);
+		precision -= (fp->buf_int_size - i);
 	}
 	else
 	{

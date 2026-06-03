@@ -6,7 +6,7 @@
 /*   By: stanaka2 <stanaka2@student.42tokyo.jp>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/06/01 21:52:54 by stanaka2          #+#    #+#             */
-/*   Updated: 2026/06/03 19:29:59 by stanaka2         ###   ########.fr       */
+/*   Updated: 2026/06/03 20:46:09 by stanaka2         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,14 +33,14 @@ due to norminette=3.3.55 bug.
 # define BINARY64_EMAX 1023
 # define BINARY64_NAN_INF 2047
 
-// PF_BINARY64_INT: BINARY64_MAX = 1.80×10^308
-# define PF_BINARY64_INT 309
-// PF_BINARY64_FRAC: -(52 + 1) + (-1022 + 1) = -1074
-# define PF_BINARY64_FRAC 1074
-// PF_BINARY64_FRAC_HEX: 1bit -> 0 or 1
-# define PF_BINARY64_INT_HEX 1
-// PF_BINARY64_FRAC_HEX: 52bit / 4bit = 13
-# define PF_BINARY64_FRAC_HEX 13
+// BINARY64_INT_DIGITS: BINARY64_MAX = 1.80×10^308
+# define BINARY64_INT_DIGITS 309
+// BINARY64_FRAC_DIGITS: -(52 + 1) + (-1022 + 1) = -1074
+# define BINARY64_FRAC_DIGITS 1074
+// BINARY64_HEX_INT_DIGIT: 1bit -> 0 or 1
+# define BINARY64_HEX_INT_DIGIT 1
+// BINARY64_HEX_FRAC_DIGITS: 52bit / 4bit = 13
+# define BINARY64_HEX_FRAC_DIGITS 13
 
 // binary80
 # define BINARY80_SIZE 80
@@ -50,14 +50,14 @@ due to norminette=3.3.55 bug.
 # define BINARY80_EMAX 16383
 # define BINARY80_NAN_INF 32767
 
-// PF_BINARY80_INT: BINARY80_MAX = 1.19×10^4932
-# define PF_BINARY80_INT 4933
+// BINARY80_INT_DIGITS: BINARY80_MAX = 1.19×10^4932
+# define BINARY80_INT_DIGITS 4933
 
-// PF_BINARY80_FRAC: -64 + (-16382 + 1) = -16445
-# define PF_BINARY80_FRAC 16445
+// BINARY80_FRAC_DIGITS: -64 + (-16382 + 1) = -16445
+# define BINARY80_FRAC_DIGITS 16445
 
-// PF_BINARY80_FRAC_HEX: 63bit / 4bit = 15.75
-# define PF_BINARY80_FRAC_HEX 16
+// BINARY80_HEX_FRAC_DIGITS: 63bit / 4bit = 15.75
+# define BINARY80_HEX_FRAC_DIGITS 16
 # if LBINARY64_MANT_DIG == 113
 #  error "binary128 has not been implemented."
 // binary128
@@ -68,30 +68,30 @@ due to norminette=3.3.55 bug.
 #  define BINARY128_EMAX 16383
 #  define BINARY128_NAN_INF 32767
 
-// PF_BINARY128_INT: BINARY128_MAX = 1.19×10^4932
-#  define PF_BINARY128_INT 4933
+// BINARY128_INT_DIGITS: BINARY128_MAX = 1.19×10^4932
+#  define BINARY128_INT_DIGITS 4933
 
-// PF_BINARY128_FRAC: -(112 + 1) + (-16382 + 1) = -16494
-#  define PF_BINARY128_FRAC 16494
+// BINARY128_FRAC_DIGITS: -(112 + 1) + (-16382 + 1) = -16494
+#  define BINARY128_FRAC_DIGITS 16494
 
-// PF_BINARY128_FRAC_HEX: 112bit / 4bit = 28
-#  define PF_BINARY128_FRAC_HEX 28
+// BINARY128_HEX_FRAC_DIGITS: 112bit / 4bit = 28
+#  define BINARY128_HEX_FRAC_DIGITS 28
 # endif
 
 enum e_pf_float_value_type
 {
-	PF_ZERO,
-	PF_NORMAL,
-	PF_SUBNORMAL,
-	PF_INF,
-	PF_NAN,
+	FLOAT_ZERO,
+	FLOAT_NORMAL,
+	FLOAT_SUBNORMAL,
+	FLOAT_INF,
+	FLOAT_NAN,
 };
 
 /*
 binary64 or binary80
 
-print_buf layout: [int_part: print_int_size][frac_part: print_frac_size]
-radix_point = print_buf + print_int_size
+print_buf layout: [int_part: buf_int_size][frac_part: buf_frac_size]
+radix_point = print_buf + buf_int_size
   radix_point[n]  (n >= 0): n-th digit after the decimal point
   radix_point[-n] (n >  0): n-th digit before the decimal point (integer part)
 This layout allows carry to propagate across the decimal point without branching.
@@ -117,9 +117,9 @@ typedef struct s_floating_point
 	uint16_t					emax;
 	uint16_t					nan_inf_exponent;
 	enum e_pf_float_value_type	value_type;
-	uint16_t					print_buf_size;
-	uint16_t					print_int_size;
-	uint16_t					print_frac_size;
+	uint16_t					buf_size;
+	uint16_t					buf_int_size;
+	uint16_t					buf_frac_size;
 }	t_pf_float;
 
 bool	pf_convert_to_decimal(t_pf_float *fp);
