@@ -1,6 +1,6 @@
 # libft
 
-42Tokyo カリキュラム向けに実装した C 言語ユーティリティライブラリです。  
+42Tokyo カリキュラム向けに実装した C 言語ユーティリティライブラリです。
 libft・get_next_line・ft_printf の 3 モジュールをひとつのアーカイブ `libft.a` にまとめています。
 
 ---
@@ -250,7 +250,7 @@ IEEE 754 に準拠した正確な変換を実装しています。
 
 ### プラットフォーム対応
 
-macOS（`__APPLE__`）と Linux で一部挙動が異なります（UTF-8 最大バイト長、`PRINTF_RESULT_LIMIT` など）。  
+macOS（`__APPLE__`）と Linux で一部挙動が異なります（UTF-8 最大バイト長、`PRINTF_RESULT_LIMIT` など）。
 各ファイルの `_darwin` サフィックス版がmacOS向けの実装です。
 
 ---
@@ -259,20 +259,22 @@ macOS（`__APPLE__`）と Linux で一部挙動が異なります（UTF-8 最大
 
 ```
 libft/
-├── include/
-│   ├── libft.h               # 統合ヘッダ
-│   ├── libft/                # libft サブヘッダ
-│   ├── ft_printf/            # ft_printf 内部ヘッダ
-│   └── get_next_line/        # get_next_line ヘッダ
-├── src/
-│   ├── ctype/
-│   ├── stdio/
-│   ├── stdlib/
-│   ├── string/
-│   ├── lst/
-│   ├── math/
-│   ├── get_next_line/
-│   └── ft_printf/
+├── include/                  # 公開ヘッダ
+│   ├── libft.h
+│   ├── ft_ctype.h
+│   ├── ft_stdio.h
+│   ├── ft_stdlib.h
+│   ├── ft_string.h
+│   ├── ft_lst.h
+│   └── ft_math.h
+├── ft_printf/
+├── ctype/
+├── stdio/
+├── stdlib/
+├── string/
+├── lst/
+├── math/
+├── get_next_line/
 └── Makefile
 ```
 
