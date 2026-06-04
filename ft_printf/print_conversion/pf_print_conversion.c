@@ -6,7 +6,7 @@
 /*   By: stanaka2 <stanaka2@student.42tokyo.jp>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/04/26 17:48:18 by stanaka2          #+#    #+#             */
-/*   Updated: 2026/06/04 01:22:09 by stanaka2         ###   ########.fr       */
+/*   Updated: 2026/06/04 02:18:44 by stanaka2         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -67,7 +67,7 @@ static void	print_integer_conversion(
 		pf_conv_u(ap, ctx, conv);
 	else if (conv->identifier == 'o')
 		pf_conv_o(ap, ctx, conv);
-	else if (ft_strchr("xX", conv->identifier))
+	else if (conv->identifier == 'x' || conv->identifier == 'X')
 		pf_conv_x(ap, ctx, conv);
 }
 

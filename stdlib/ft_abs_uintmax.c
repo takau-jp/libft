@@ -1,18 +1,20 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_abs_uint.c                                      :+:      :+:    :+:   */
+/*   ft_abs_uintmax.c                                   :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: stanaka2 <stanaka2@student.42tokyo.jp>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/06/11 09:04:01 by stanaka2          #+#    #+#             */
-/*   Updated: 2026/06/04 11:18:10 by stanaka2         ###   ########.fr       */
+/*   Created: 2026/06/04 11:04:02 by stanaka2          #+#    #+#             */
+/*   Updated: 2026/06/04 11:17:47 by stanaka2         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-unsigned int	ft_abs_uint(int n)
+#include <stdint.h>
+
+uintmax_t	ft_abs_uintmax(intmax_t n)
 {
 	if (n < 0)
-		return (((unsigned int)(-(n + 1)) + 1));
-	return ((unsigned int)n);
+		return (((uintmax_t)(-(n + 1)) + 1));
+	return ((uintmax_t)n);
 }
