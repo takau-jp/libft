@@ -6,7 +6,7 @@
 #    By: stanaka2 <stanaka2@student.42tokyo.jp>     +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2025/04/24 21:27:03 by stanaka2          #+#    #+#              #
-#    Updated: 2026/06/04 12:34:15 by stanaka2         ###   ########.fr        #
+#    Updated: 2026/06/12 16:32:01 by stanaka2         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -57,8 +57,8 @@ help:
 	@printf "$(CYAN)Usage:$(DEF_COLOR)\n"
 	@printf "$(GREEN)all$(DEF_COLOR)        Build $(NAME)\n"
 	@printf "$(GREEN)clean$(DEF_COLOR)      Remove object files, dependency files\n"
-	@printf "$(GREEN)fclean$(DEF_COLOR)     Remove all generated files\n"
-	@printf "$(GREEN)re$(DEF_COLOR)         Rebuild from scratch\n"
+	@printf "$(GREEN)fclean$(DEF_COLOR)     Remove all generated files and directories\n"
+	@printf "$(GREEN)re$(DEF_COLOR)         Rebuild with all and fclean\n"
 	@printf "$(YELLOW)san$(DEF_COLOR)        Build with -g -fsanitize=address,undefined\n"
 	@printf "$(YELLOW)debug$(DEF_COLOR)      Build with -g debug symbols\n"
 	@printf "$(YELLOW)norm$(DEF_COLOR)       Run norminette\n"
