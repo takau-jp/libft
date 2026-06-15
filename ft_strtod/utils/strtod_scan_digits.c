@@ -6,7 +6,7 @@
 /*   By: stanaka2 <stanaka2@student.42tokyo.jp>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/06/14 03:22:31 by stanaka2          #+#    #+#             */
-/*   Updated: 2026/06/14 20:03:06 by stanaka2         ###   ########.fr       */
+/*   Updated: 2026/06/15 15:43:37 by stanaka2         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,7 +26,6 @@ static void		add_digit(t_to_double *to_double, ptrdiff_t i, uint8_t digit);
 void	strtod_scan_decimal_digits(const char **nptr, t_to_double *to_double)
 {
 	const long	exponent = strtod_pre_scan_decimal_exponent(*nptr);
-	const long	shift = -exponent;
 	const char	*radix_point;
 	ptrdiff_t	i;
 
@@ -38,12 +37,12 @@ void	strtod_scan_decimal_digits(const char **nptr, t_to_double *to_double)
 	{
 		if (**nptr != '0' && **nptr != '.')
 		{
-			if (i < 0 && LONG_MIN - i < shift)
+			if (0 < exponent && LONG_MIN + exponent > i)
 				to_double->is_inf = true;
-			else if (0 < i && LONG_MAX - i < shift)
+			else if (exponent < 0 && LONG_MAX + exponent < i)
 				to_double->has_sticky = true;
 			else
-				add_digit(to_double, i + shift, **nptr - '0');
+				add_digit(to_double, i - exponent, **nptr - '0');
 		}
 		if (**nptr != '.')
 			++i;
