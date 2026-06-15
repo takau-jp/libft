@@ -6,12 +6,13 @@
 /*   By: stanaka2 <stanaka2@student.42tokyo.jp>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/04/23 17:00:59 by stanaka2          #+#    #+#             */
-/*   Updated: 2026/06/12 16:26:20 by stanaka2         ###   ########.fr       */
+/*   Updated: 2026/06/12 16:59:17 by stanaka2         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "ft_string.h"
 
+#include "ft_stdlib.h"
 #include "ft_printf/ft_printf.h"
 #include "ft_printf/print_utils.h"
 #include "./floating_point_internal.h"

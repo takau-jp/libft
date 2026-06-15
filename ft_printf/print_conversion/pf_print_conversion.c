@@ -6,7 +6,7 @@
 /*   By: stanaka2 <stanaka2@student.42tokyo.jp>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/04/26 17:48:18 by stanaka2          #+#    #+#             */
-/*   Updated: 2026/06/12 16:57:23 by stanaka2         ###   ########.fr       */
+/*   Updated: 2026/06/12 16:46:55 by stanaka2         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -71,7 +71,6 @@ static void	print_integer_conversion(
 		pf_conv_x(ap, ctx, conv);
 }
 
-// %a binary80 has not been implemented.
 static void	print_float_conversion(va_list *ap, t_ctx *ctx, t_conv *conv)
 {
 	if (conv->length == LENGTH_UPPER_L)
