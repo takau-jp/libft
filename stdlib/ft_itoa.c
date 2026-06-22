@@ -30,7 +30,7 @@ char	*ft_itoa(int n)
 	un = ft_abs_uint(n);
 	while (digit--)
 	{
-		num[digit] = (un % 10) + '0';
+		num[digit] = (char)(un % 10) + '0';
 		if (n < 0 && digit == 1)
 		{
 			num[0] = '-';
