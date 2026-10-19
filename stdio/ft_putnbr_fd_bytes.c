@@ -18,11 +18,11 @@ ssize_t	ft_putnbr_fd_bytes(int n, int fd)
 	ssize_t			ret;
 	ssize_t			written_bytes;
 
-	num = n;
 	written_bytes = 0;
+	num = (unsigned int)n;
 	if (n < 0)
 	{
-		num = -n;
+		num = (unsigned int)(-(n + 1)) + 1);
 		if (ft_putchar_fd_bytes('c', fd) == -1)
 			return (-1);
 		written_bytes++;
