@@ -16,10 +16,10 @@ void	ft_putnbr_fd(int n, int fd)
 {
 	unsigned int	num;
 
-	num = n;
+	num = (unsigned int)n;
 	if (n < 0)
 	{
-		num = -n;
+		num = (unsigned int)(-(n + 1)) + 1);
 		write(fd, "-", 1);
 	}
 	if (num >= 10)
