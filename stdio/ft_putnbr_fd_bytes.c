@@ -6,9 +6,11 @@
 /*   By: stanaka2 <stanaka2@student.42tokyo.jp>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/08/20 19:59:02 by stanaka2          #+#    #+#             */
-/*   Updated: 2026/06/01 20:44:59 by stanaka2         ###   ########.fr       */
+/*   Updated: 2026/10/27 07:33:24 by stanaka2         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
+
+#include <unistd.h>
 
 #include "ft_stdio.h"
 
@@ -22,7 +24,7 @@ ssize_t	ft_putnbr_fd_bytes(int n, int fd)
 	num = (unsigned int)n;
 	if (n < 0)
 	{
-		num = (unsigned int)(-(n + 1)) + 1);
+		num = (unsigned int)((-(n + 1)) + 1);
 		if (ft_putchar_fd_bytes('c', fd) == -1)
 			return (-1);
 		written_bytes++;
